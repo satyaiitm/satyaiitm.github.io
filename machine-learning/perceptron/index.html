@@ -13,28 +13,28 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../../notes/">
       
       
-        <link rel="next" href="../machine-learning/perceptron/">
+        <link rel="next" href="../../math/linear-algebra/">
       
       
         
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Machine Learning Notes - Satya's ML Notes</title>
+        <title>Perceptron - Satya's ML Notes</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#machine-learning-notes" class="md-skip">
+        <a href="#perceptron" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Satya&#39;s ML Notes" class="md-header__button md-logo" aria-label="Satya's ML Notes" data-md-component="logo">
+    <a href="../.." title="Satya&#39;s ML Notes" class="md-header__button md-logo" aria-label="Satya's ML Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Machine Learning Notes
+              Perceptron
             
           </span>
         </div>
@@ -216,7 +216,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../.." class="md-tabs__link">
         
   
   
@@ -233,11 +233,9 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="./" class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href="../../notes/" class="md-tabs__link">
         
   
   
@@ -254,11 +252,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../machine-learning/perceptron/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -278,7 +278,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../math/linear-algebra/" class="md-tabs__link">
+        <a href="../../math/linear-algebra/" class="md-tabs__link">
           
   
   
@@ -312,7 +312,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Satya&#39;s ML Notes" class="md-nav__button md-logo" aria-label="Satya's ML Notes" data-md-component="logo">
+    <a href="../.." title="Satya&#39;s ML Notes" class="md-nav__button md-logo" aria-label="Satya's ML Notes" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -330,7 +330,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -354,6 +354,90 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine Learning Notes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Machine learning
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Machine learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
     
   
   
@@ -373,7 +457,7 @@
   <span class="md-ellipsis">
     
   
-    Machine Learning Notes
+    Perceptron
   
 
     
@@ -391,7 +475,7 @@
   <span class="md-ellipsis">
     
   
-    Machine Learning Notes
+    Perceptron
   
 
     
@@ -417,10 +501,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#learning-roadmap" class="md-nav__link">
+  <a href="#what-is-a-perceptron" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📚 Learning Roadmap
+        What is a Perceptron?
       
     </span>
   </a>
@@ -428,115 +512,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#topics" class="md-nav__link">
+  <a href="#intuition" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📖 Topics
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📖 Topics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mathematics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📐 Mathematics
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#machine-learning" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🤖 Machine Learning
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#deep-learning" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧠 Deep Learning
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#frameworks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        💻 Frameworks
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#projects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Projects
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#research-papers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📄 Research Papers
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ❓ Interview Questions
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cheat-sheets" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📝 Cheat Sheets
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-youll-find" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🎯 What You'll Find
+        Intuition
       
     </span>
   </a>
@@ -544,10 +523,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recommended-learning-path" class="md-nav__link">
+  <a href="#formula" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🌟 Recommended Learning Path
+        Formula
       
     </span>
   </a>
@@ -555,10 +534,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#repository-structure" class="md-nav__link">
+  <a href="#y-fwxb" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📂 Repository Structure
+        $$ y = f(wx+b) $$
       
     </span>
   </a>
@@ -566,21 +545,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#progress-tracker" class="md-nav__link">
+  <a href="#related-topics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📈 Progress Tracker
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contributing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📬 Contributing
+        Related Topics
       
     </span>
   </a>
@@ -591,87 +559,6 @@
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Machine learning
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Machine learning
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../machine-learning/perceptron/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Perceptron
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -745,7 +632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../math/linear-algebra/" class="md-nav__link">
+      <a href="../../math/linear-algebra/" class="md-nav__link">
         
   
   
@@ -800,10 +687,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#learning-roadmap" class="md-nav__link">
+  <a href="#what-is-a-perceptron" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📚 Learning Roadmap
+        What is a Perceptron?
       
     </span>
   </a>
@@ -811,115 +698,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#topics" class="md-nav__link">
+  <a href="#intuition" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📖 Topics
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="📖 Topics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#mathematics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📐 Mathematics
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#machine-learning" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🤖 Machine Learning
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#deep-learning" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🧠 Deep Learning
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#frameworks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        💻 Frameworks
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#projects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Projects
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#research-papers" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📄 Research Papers
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#interview-questions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ❓ Interview Questions
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cheat-sheets" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📝 Cheat Sheets
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-youll-find" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🎯 What You'll Find
+        Intuition
       
     </span>
   </a>
@@ -927,10 +709,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recommended-learning-path" class="md-nav__link">
+  <a href="#formula" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🌟 Recommended Learning Path
+        Formula
       
     </span>
   </a>
@@ -938,10 +720,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#repository-structure" class="md-nav__link">
+  <a href="#y-fwxb" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📂 Repository Structure
+        $$ y = f(wx+b) $$
       
     </span>
   </a>
@@ -949,21 +731,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#progress-tracker" class="md-nav__link">
+  <a href="#related-topics" class="md-nav__link">
     <span class="md-ellipsis">
       
-        📈 Progress Tracker
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contributing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        📬 Contributing
+        Related Topics
       
     </span>
   </a>
@@ -987,176 +758,26 @@
 
 
 
-<h1 id="machine-learning-notes">Machine Learning Notes</h1>
-<p>Welcome! 👋</p>
-<p>This website contains my personal notes, explanations, mathematical derivations, code examples, and learning resources related to <strong>Machine Learning</strong>, <strong>Deep Learning</strong>, and <strong>Artificial Intelligence</strong>.</p>
-<p>The goal of this project is to build a structured knowledge base that helps me revise concepts quickly while also serving as a public resource for anyone interested in ML.</p>
+<h1 id="perceptron">Perceptron</h1>
+<h2 id="what-is-a-perceptron">What is a Perceptron?</h2>
+<p>A perceptron is the simplest artificial neuron used for binary classification.</p>
 <hr />
-<h2 id="learning-roadmap">📚 Learning Roadmap</h2>
-<pre class="mermaid"><code>flowchart TD
-    A[Mathematics]
-    B[Python]
-    C[Machine Learning]
-    D[Deep Learning]
-    E[Projects]
-    F[Papers]
-
-    A --&gt; C
-    B --&gt; C
-    C --&gt; D
-    D --&gt; E
-    D --&gt; F</code></pre>
+<h2 id="intuition">Intuition</h2>
+<p>Imagine you want to decide whether an email is spam.</p>
+<p>The perceptron looks at different features of the email and combines them using weights.</p>
+<p>If the final score is greater than a threshold, it predicts <strong>Spam</strong>.</p>
+<p>Otherwise it predicts <strong>Not Spam</strong>.</p>
 <hr />
-<h2 id="topics">📖 Topics</h2>
-<h3 id="mathematics">📐 Mathematics</h3>
+<h2 id="formula">Formula</h2>
+<div class="arithmatex">\[
+y = f(wx+b)
+\]</div>
+<h2 id="y-fwxb">$$ y = f(wx+b) $$</h2>
+<h2 id="related-topics">Related Topics</h2>
 <ul>
-<li>Linear Algebra</li>
-<li>Probability</li>
-<li>Statistics</li>
-<li>Calculus</li>
-<li>Optimization</li>
-</ul>
-<hr />
-<h3 id="machine-learning">🤖 Machine Learning</h3>
-<ul>
-<li>Perceptron</li>
 <li>Linear Regression</li>
 <li>Logistic Regression</li>
-<li>Gradient Descent</li>
-<li>Decision Trees</li>
-<li>Random Forest</li>
-<li>Support Vector Machines</li>
-<li>Naive Bayes</li>
-<li>K-Means Clustering</li>
-<li>Principal Component Analysis (PCA)</li>
 </ul>
-<hr />
-<h3 id="deep-learning">🧠 Deep Learning</h3>
-<ul>
-<li>Neural Networks</li>
-<li>Backpropagation</li>
-<li>Activation Functions</li>
-<li>Regularization</li>
-<li>CNN</li>
-<li>RNN</li>
-<li>LSTM</li>
-<li>Attention</li>
-<li>Transformers</li>
-</ul>
-<hr />
-<h3 id="frameworks">💻 Frameworks</h3>
-<ul>
-<li>NumPy</li>
-<li>Pandas</li>
-<li>Matplotlib</li>
-<li>Scikit-Learn</li>
-<li>PyTorch</li>
-<li>TensorFlow</li>
-</ul>
-<hr />
-<h3 id="projects">🚀 Projects</h3>
-<p>A collection of machine learning projects with:
-- Problem Statement
-- Dataset
-- Model Architecture
-- Training Process
-- Evaluation
-- Source Code</p>
-<hr />
-<h3 id="research-papers">📄 Research Papers</h3>
-<p>Summaries and explanations of important ML and DL papers.</p>
-<hr />
-<h3 id="interview-questions">❓ Interview Questions</h3>
-<p>Frequently asked interview questions with explanations.</p>
-<hr />
-<h3 id="cheat-sheets">📝 Cheat Sheets</h3>
-<p>Quick revision notes for:
-- Common equations
-- ML algorithms
-- Deep learning architectures
-- PyTorch API
-- Probability distributions</p>
-<hr />
-<h2 id="what-youll-find">🎯 What You'll Find</h2>
-<p>Each topic generally includes:</p>
-<ul>
-<li>📖 Intuition</li>
-<li>🧮 Mathematical Derivation</li>
-<li>📊 Visual Explanation</li>
-<li>💻 Python Implementation</li>
-<li>⚙️ Complexity Analysis</li>
-<li>✅ Advantages &amp; Limitations</li>
-<li>📌 Key Takeaways</li>
-<li>🔗 References</li>
-</ul>
-<hr />
-<h2 id="recommended-learning-path">🌟 Recommended Learning Path</h2>
-<ol>
-<li>Mathematics</li>
-<li>Python &amp; NumPy</li>
-<li>Machine Learning Fundamentals</li>
-<li>Model Evaluation</li>
-<li>Deep Learning</li>
-<li>Computer Vision</li>
-<li>Natural Language Processing</li>
-<li>Generative AI</li>
-<li>Research Papers</li>
-<li>Real-world Projects</li>
-</ol>
-<hr />
-<h2 id="repository-structure">📂 Repository Structure</h2>
-<div class="highlight"><pre><span></span><code>docs/
-├── math/
-├── machine-learning/
-├── deep-learning/
-├── pytorch/
-├── tensorflow/
-├── projects/
-├── papers/
-├── interview/
-├── cheatsheets/
-└── images/
-</code></pre></div>
-<hr />
-<h2 id="progress-tracker">📈 Progress Tracker</h2>
-<table>
-<thead>
-<tr>
-<th>Section</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Mathematics</td>
-<td>🚧</td>
-</tr>
-<tr>
-<td>Machine Learning</td>
-<td>🚧</td>
-</tr>
-<tr>
-<td>Deep Learning</td>
-<td>🚧</td>
-</tr>
-<tr>
-<td>PyTorch</td>
-<td>🚧</td>
-</tr>
-<tr>
-<td>Projects</td>
-<td>🚧</td>
-</tr>
-<tr>
-<td>Papers</td>
-<td>🚧</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="contributing">📬 Contributing</h2>
-<p>If you notice any mistakes or have suggestions, feel free to open an issue or submit a pull request.</p>
-<p>Happy Learning! 🚀</p>
 
 
 
@@ -1212,14 +833,14 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.copy", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
       
-        <script src="../javascripts/mermaid.js"></script>
+        <script src="../../javascripts/mermaid.js"></script>
       
         <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
