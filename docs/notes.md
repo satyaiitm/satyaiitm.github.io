@@ -1,4 +1,4 @@
-# Machine Learning Notes
+#  Notes
 
 Welcome! 👋
 

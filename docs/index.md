@@ -1,9 +1,10 @@
-# Welcome 
+ 
 
-Hi! I'm Satya.
+# Hi! I'm Satya.
 
 This website contains my Machine Learning notes.
 
+See notes: [Notes](notes.md)
 ## Topics
 
 - Mathematics
