@@ -1,4 +1,7 @@
 site_name: Satya
 
 theme:
-  name: material
+  name: materialgit 
+
+markdown_extensions:
+  - pymdownx.superfences
