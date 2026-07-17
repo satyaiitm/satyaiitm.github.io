@@ -1,2 +1,0 @@
-# satyaiitm.github.io
-site
