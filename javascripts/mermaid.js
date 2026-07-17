@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document$.subscribe(function () {
     mermaid.initialize({
         startOnLoad: true
     });
