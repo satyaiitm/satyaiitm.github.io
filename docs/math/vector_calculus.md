@@ -22,7 +22,7 @@ $$
 D_{\frac{u}{||u||}} f(\tilde{a}) =\frac{u}{||u||} . \nabla{f(\tilde{a})} = \frac{1}{||u||} < u, \nabla{f(\tilde{a})}>
 $$
 
-if $\nabla f$ exists and continous in an open ball around point $(a_1 , a_2, ...,a_n)$ then the directional derivative of the function $f$ at point $(a_1 , a_2, ...,a_n)$ in the direction of a vector $V$, given by the `dot product of gradient of function at $(a_1 , a_2, ...,a_n)$ with unit vector in the direction of $V$`
+if $\nabla f$ exists and continous in an open ball around point $(a_1 , a_2, ...,a_n)$ then the directional derivative of the function $f$ at point $(a_1 , a_2, ...,a_n)$ in the direction of a vector $V$, given by the dot product of gradient of function at $(a_1 , a_2, ...,a_n)$ with unit vector in the direction of $V$
 
 $$
 \begin {align*}D_u \bullet f(a_1 , a_2, ...,a_n) &= \nabla{f(a_1 , a_2, ...,a_n)} \bullet \frac{u}{||u||} \\ 
@@ -31,27 +31,33 @@ $$
 $$
 
 - $||\nabla{f(\tilde{a})}|| .  cos\theta$      is maximum if $cos \theta$ is maximum,
- and $cos \theta$ is max at $\theta = 0 \degree$ `(that means $u$ is in the direction of $\nabla{f(\tilde{a})}$ )`
+ and $cos \theta$ is max at $\theta = 0 ^\circ$ (that means $u$ is in the direction of $\nabla{f(\tilde{a})}$ )
 - $||\nabla{f(\tilde{a})}|| .  cos\theta$      is minimum if $cos \theta$ is minimum, 
-and $cos \theta$ is min at $\theta = 180 \degree$  `(that means $u$ is in the opposit direction of $\nabla{f(\tilde{a})}$ )`
+and $cos \theta$ is min at $\theta = 180 ^\circ$  (that means $u$ is in the opposit direction of $\nabla{f(\tilde{a})}$ )
 
-$\boxed{\underset{\theta = \pi =180 \degree}{-1} \le cos \theta \le \underset{\theta = 0}{1}}$
+$\boxed{\underset{\theta = \pi =180 ^\circ}{-1} \le cos \theta \le \underset{\theta = 0}{1}}$
+
 
 **Maximum value of directional derivative**
 
-$$
-\begin {align*}
-\nabla{f(a,b)}.u 
-&= \Bigg[\nabla{f(a,b)}. \cfrac{\nabla{f(a,b)}}{||\nabla{f(a,b)}||} \Bigg] \\ 
-&= \cfrac{< \nabla{f(a,b)} . \nabla{f(a,b)} >}{||\nabla{f(a,b)}||}
-= \cfrac{|| \nabla{f(a,b)}|| ^2}{||\nabla{f(a,b)}||} \\
-&= \Bigg[||\nabla{f(a,b)}|| \Bigg]
 
+
+$$
+\begin{align*}
+\nabla f(a,b) \cdot \mathbf{u} 
+&= \left[ \nabla f(a,b) \cdot \frac{\nabla f(a,b)}{\|\nabla f(a,b)\|} \right] \\ 
+&= \frac{\langle \nabla f(a,b), \nabla f(a,b) \rangle}{\|\nabla f(a,b)\|} \\
+&= \frac{\|\nabla f(a,b)\|^2}{\|\nabla f(a,b)\|} \\
+&= \|\nabla f(a,b)\|
 \end{align*}
 $$
 
-$\nabla{f(a,b)}.u 
-= \nabla{f(a,b)}. \cfrac{\nabla{f(a,b)}}{||\nabla{f(a,b)}||} 
-= \cfrac{< \nabla{f(a,b)} . \nabla{f(a,b)} >}{||\nabla{f(a,b)}||}\\
-= \cfrac{|| \nabla{f(a,b)}|| ^2}{||\nabla{f(a,b)}||} 
-= ||\nabla{f(a,b)}||$
+$$
+\begin{aligned}
+\nabla f(a,b) \cdot \mathbf{u} 
+&= \nabla f(a,b) \cdot \frac{\nabla f(a,b)}{\|\nabla f(a,b)\|} \\
+&= \frac{\langle \nabla f(a,b), \nabla f(a,b) \rangle}{\|\nabla f(a,b)\|} \\
+&= \frac{\|\nabla f(a,b)\|^2}{\|\nabla f(a,b)\|} \\
+&= \|\nabla f(a,b)\|
+\end{aligned}
+$$

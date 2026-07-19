@@ -146,67 +146,30 @@ integers
 
 
 ### table for discrete random variables
-$$
 
-\begin{array}{|l|l|l|c|c|}
-\hline
-\text{Distribution} & \text{PMF } (f_X(k)) & \text{CDF } (F_X(x)) & E[X] & \text{Var}(X) \\ \hline
-\begin{array}{l} \text{Uniform}(A) \\ A = \{a, a+1, \dots, b\} \end{array} & 
-\begin{array}{l} \frac{1}{n}, \;\; x = k \\ n = b - a + 1 \\ k = a, a+1, \dots, b \end{array} & 
-\begin{cases} 0 & x < 0 \\ \frac{k-a+1}{n} & k \le x < k+1 \\ & k = a, a+1, \dots, b-1, b \\ 1 & x \ge n \end{cases} & 
-\frac{a+b}{2} & \frac{n^2 - 1}{12} \\ \hline
 
-\text{Bernoulli}(p) & 
-\begin{cases} p & x = 1 \\ 1-p & x = 0 \end{cases} & 
-\begin{cases} 0 & x < 0 \\ 1-p & 0 \le x < 1 \\ 1 & x \ge 1 \end{cases} & 
-p & p(1-p) \\ \hline
+| Distribution | PMF $f_X(k)$ | CDF $F_X(x)$ | $E[X]$ | $\text{Var}(X)$ |
+| :--- | :--- | :--- | :---: | :---: |
+| **Uniform**$(A)$<br>$A = \{a, a+1, \dots, b\}$ | $\frac{1}{n}, \text{ for } k \in A$<br>$n = b - a + 1$ | $\begin{cases} 0 & x < a \\\ \frac{\lfloor x \rfloor - a + 1}{n} & a \le x < b \\\ 1 & x \ge b \end{cases}$ | $\frac{a+b}{2}$ | $\frac{n^2 - 1}{12}$ |
+| **Bernoulli**$(p)$ | $\begin{cases} p & k = 1 \\\ 1-p & k = 0 \end{cases}$ | $\begin{cases} 0 & x < 0 \\\ 1-p & 0 \le x < 1 \\\ 1 & x \ge 1 \end{cases}$ | $p$ | $p(1-p)$ |
+| **Binomial**$(n,p)$ | $\binom{n}{k} p^k (1-p)^{n-k}$<br>$\text{for } k = 0, 1, \dots, n$ | $\begin{cases} 0 & x < 0 \\\ \sum_{i=0}^{\lfloor x \rfloor} \binom{n}{i} p^i (1-p)^{n-i} & 0 \le x < n \\\ 1 & x \ge n \end{cases}$ | $np$ | $np(1-p)$ |
+| **Geometric**$(p)$ | $(1-p)^{k-1}p$<br>$\text{for } k = 1, 2, \dots$ | $\begin{cases} 0 & x < 1 \\\ 1 - (1-p)^{\lfloor x \rfloor} & x \ge 1 \end{cases}$ | $\frac{1}{p}$ | $\frac{1-p}{p^2}$ |
+| **Poisson**$(\lambda)$ | $\frac{e^{-\lambda}\lambda^k}{k!}$<br>$\text{for } k = 0, 1, \dots$ | $\begin{cases} 0 & x < 0 \\\ e^{-\lambda}\sum_{i=0}^{\lfloor x \rfloor} \frac{\lambda^i}{i!} & x \ge 0 \end{cases}$ | $\lambda$ | $\lambda$ |
 
-\text{Binomial}(n,p) & 
-\begin{array}{l} {}^nC_k p^k (1-p)^{n-k}, \\ k = 0, 1, \dots, n \end{array} & 
-\begin{cases} 0 & x < 0 \\ \sum_{i=0}^k {}^nC_i p^i (1-p)^{n-i} & k \le x < k+1 \\ & k = 0, 1, \dots, n \\ 1 & x \ge n \end{cases} & 
-np & np(1-p) \\ \hline
 
-\text{Geometric}(p) & 
-\begin{array}{l} (1-p)^{k-1}p, \\ k = 1, \dots, \infty \end{array} & 
-\begin{cases} 0 & x < 0 \\ 1 - (1-p)^k & k \le x < k+1 \\ & k = 1, \dots, \infty \end{cases} & 
-\frac{1}{p} & \frac{1-p}{p^2} \\ \hline
 
-\text{Poisson}(\lambda) & 
-\begin{array}{l} \frac{e^{-\lambda}\lambda^k}{k!}, \\ k = 0,1, \dots, \infty \end{array} & 
-\begin{cases} 0 & x < 0 \\ e^{-\lambda}\sum_{i=0}^k \frac{\lambda^i}{i!} & k \le x < k+1 \\ & k = 0, 1, \dots, \infty \end{cases} & 
-\lambda & \lambda \\ \hline
-\end{array}
-$$
+
+
 
 ### table for continous random variables
 
-$$
-\begin{array}{|l|l|l|c|c|}
-\hline
-\text{Distribution} & \text{PDF } (f_X(k)) & \text{CDF } (F_X(x)) & E[X] & \text{Var}(X) \\ \hline
 
-\text{Uniform}[a,b] & 
-\frac{1}{b - a}, \;\; a \le x \le b & 
-\begin{cases} 0 & x \le a \\ \frac{x-a}{b-a} & a < x < b \\ 1 & x \ge b \end{cases} & 
-\frac{a+b}{2} & \frac{(b-a)^2}{12} \\ \hline
 
-\text{Exp}(\lambda) & 
-\lambda e^{-\lambda x}, \;\; x > 0 & 
-\begin{cases} 0 & x \le 0 \\ 1 - e^{-\lambda x} & x > 0 \end{cases} & 
-\frac{1}{\lambda} & \frac{1}{\lambda^2} \\ \hline
 
-\text{Normal}(\mu, \sigma^2) & 
-\begin{array}{l} \frac{1}{\sigma\sqrt{2\pi}} \exp\left( \frac{-(x-\mu)^2}{2\sigma^2} \right), \\ -\infty < x < \infty \end{array} & 
-\text{No closed form} & 
-\mu & \sigma^2 \\ \hline
-
-\text{Gamma}(\alpha, \beta) & 
-\frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}, \;\; x > 0 & & 
-\frac{\alpha}{\beta} & \frac{\alpha}{\beta^2} \\ \hline
-
-\text{Beta}(\alpha, \beta) & 
-\begin{array}{l} \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha-1} (1-x)^{\beta-1} \\ 0 < x < 1 \end{array} & & 
-\frac{\alpha}{\alpha+\beta} & \frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)} \\ \hline
-\end{array}
-
-$$
+| Distribution | PDF $f_X(x)$ | CDF $F_X(x)$ | $E[X]$ | $\text{Var}(X)$ |
+| :--- | :--- | :--- | :---: | :---: |
+| **Uniform**$[a,b]$ | $\frac{1}{b - a}, \text{ for } a \le x \le b$ | $\begin{cases} 0 & x \le a \\\ \frac{x-a}{b-a} & a < x < b \\\ 1 & x \ge b \end{cases}$ | $\frac{a+b}{2}$ | $\frac{(b-a)^2}{12}$ |
+| **Exp**$(\lambda)$ | $\lambda e^{-\lambda x}, \text{ for } x > 0$ | $\begin{cases} 0 & x \le 0 \\\ 1 - e^{-\lambda x} & x > 0 \end{cases}$ | $\frac{1}{\lambda}$ | $\frac{1}{\lambda^2}$ |
+| **Normal**$(\mu, \sigma^2)$ | $\frac{1}{\sigma\sqrt{2\pi}} \exp\left( \frac{-(x-\mu)^2}{2\sigma^2} \right), -\infty < x < \infty$ | No closed form | $\mu$ | $\sigma^2$ |
+| **Gamma**$(\alpha, \beta)$ | $\frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}, \text{ for } x > 0$ | No simple form | $\frac{\alpha}{\beta}$ | $\frac{\alpha}{\beta^2}$ |
+| **Beta**$(\alpha, \beta)$ | $\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha-1} (1-x)^{\beta-1}, \text{ for } 0 < x < 1$ | No simple form | $\frac{\alpha}{\alpha+\beta}$ | $\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}$ |

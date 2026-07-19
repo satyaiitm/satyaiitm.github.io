@@ -13,30 +13,51 @@ $$
 $$
 
 # Types of Matrix
+## The Comprehensive Matrix Taxonomy Guide
 
-$\textbf{The Comprehensive Matrix Taxonomy Guide} \\[5pt]\text{Let } A = [a_{ij}] \text{ be a matrix of size } m \times n \text{ over a field } \mathbb{F} \text{ (usually } \mathbb{R} \text{ or } \mathbb{C}\text{).} \\[12pt]\begin{aligned}&\textbf{1. Structural \& Dimensional Shapes} \\&\quad \text{• Square Matrix:} && m = n \quad (\text{Equal number of rows and columns}) \\&\quad \text{• Rectangular Matrix:} && m \neq n \\&\quad \text{• Row Vector:} && 1 \times n \implies \begin{bmatrix} a_1 & a_2 & \dots & a_n \end{bmatrix} \\&\quad \text{• Column Vector:} && m \times 1 \implies \begin{bmatrix} a_1 \\ a_2 \\ \vdots \\ a_m \end{bmatrix} \\[12pt]&\textbf{2. Basic Entry-Based Matrices} \\&\quad \text{• Zero / Null Matrix } (O): && a_{ij} = 0 \quad \forall \, i, j \\&\quad \text{• Identity Matrix } (I_n): && a_{ij} = 1 \text{ if } i=j, \text{ and } a_{ij} = 0 \text{ if } i \neq j \implies \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \\&\quad \text{• Diagonal Matrix } (D): && a_{ij} = 0 \quad \forall \, i \neq j \implies \text{diag}(d_1, d_2, \dots, d_n) \\&\quad \text{• Scalar Matrix:} && a_{ij} = k \text{ if } i=j, \text{ and } a_{ij} = 0 \text{ if } i \neq j \quad (A = kI) \\[12pt]&\textbf{3. Triangular Matrices } (\text{Square}) \\&\quad \text{• Upper Triangular:} && a_{ij} = 0 \quad \forall \, i > j \implies \begin{bmatrix} a_{11} & a_{12} \\ 0 & a_{22} \end{bmatrix} \\&\quad \text{• Lower Triangular:} && a_{ij} = 0 \quad \forall \, i < j \implies \begin{bmatrix} a_{11} & 0 \\ a_{21} & a_{22} \end{bmatrix} \\&\quad \text{• Strictly Triangular:} && a_{ij} = 0 \quad \forall \, i = j \quad (\text{Zeros all along the main diagonal}) \\[12pt]&\textbf{4. Transpose \& Adjoint Symmetry Operations} \\&\quad \text{• Symmetric Matrix:} && A^T = A \quad \iff a_{ij} = a_{ji} \\&\quad \text{• Skew-Symmetric:} && A^T = -A \iff a_{ij} = -a_{ji} \quad (\text{Main diagonal elements must be } 0) \\&\quad \text{• Hermitian Matrix:} && A^* = A \quad \iff a_{ij} = \overline{a_{ji}} \quad (\text{Complex conjugate transpose, } A^* = \overline{A}^T) \\&\quad \text{• Skew-Hermitian:} && A^* = -A \iff a_{ij} = -\overline{a_{ji}} \\[12pt]&\textbf{5. Operational \& Spectral Classes} \\&\quad \text{• Orthogonal Matrix:} && A^T A = A A^T = I \iff A^{-1} = A^T \quad (\text{Real matrix columns are orthonormal}) \\&\quad \text{• Unitary Matrix:} && A^* A = A A^* = I \iff A^{-1} = A^* \quad (\text{Complex matrix columns are orthonormal}) \\&\quad \text{• Normal Matrix:} && A^* A = A A^* \quad (\text{Commutes with its conjugate transpose}) \\&\quad \text{• Invertible / Regular:} && \det(A) \neq 0 \iff A^{-1} \text{ exists} \\&\quad \text{• Singular Matrix:} && \det(A) = 0 \iff \text{No inverse exists} \\[12pt]&\textbf{6. Special Algebraic Powers} \\&\quad \text{• Idempotent Matrix:} && A^2 = A \quad (\text{Acts as a geometric projection}) \\&\quad \text{• Nilpotent Matrix:} && A^k = O \quad \text{for some positive integer } k \\&\quad \text{• Involutary Matrix:} && A^2 = I \quad \iff A = A^{-1} \quad (\text{Acts as its own inverse matrix reflection})\end{aligned}$
 
-$\textbf{Visual Reference: Types of Matrices} \\[10pt]\begin{array}{ccc}\begin{array}{c} \textbf{Row Matrix} \\ \begin{bmatrix} 3 & 5 & 7 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Column Matrix} \\ \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Square Matrix} \\ \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \end{array} \\[25pt]
+
+---
+---
+
+## Visual Reference: Types of Matrices 
+
+$\begin{array}{ccc}\begin{array}{c} \textbf{Row Matrix} \\ \begin{bmatrix} 3 & 5 & 7 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Column Matrix} \\ \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Square Matrix} \\ \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \end{array} \\[25pt]
 \begin{array}{c} \textbf{Diagonal Matrix} \\ \begin{bmatrix} 4 & 0 \\ 0 & 9 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Scalar Matrix} \\ \begin{bmatrix} 5 & 0 \\ 0 & 5 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Identity Matrix} \\ \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \end{array} \\[25pt]
 \begin{array}{c} \textbf{Zero or Null Matrix} \\ \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Upper Triangular} \\ \begin{bmatrix} 1 & 2 & 3 \\ 0 & 4 & 5 \\ 0 & 0 & 6 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Lower Triangular} \\ \begin{bmatrix} 1 & 0 & 0 \\ 2 & 3 & 0 \\ 4 & 5 & 6 \end{bmatrix} \end{array} \\[25pt]
 \begin{array}{c} \textbf{Symmetric Matrix} \\ \begin{bmatrix} 1 & 2 \\ 2 & 3 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Skew-Symmetric} \\ \begin{bmatrix} 0 & 2 \\ -2 & 0 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Singular Matrix} \\ \begin{bmatrix} 2 & 4 \\ 1 & 2 \end{bmatrix} \end{array} \\[25pt]
 \begin{array}{c} \textbf{Non-Singular Matrix} \\ \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Orthogonal Matrix} \\ \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix} \end{array} & \begin{array}{c} \textbf{Equal Matrices} \\ \begin{bmatrix} 2 & 3 \\ 4 & 5 \end{bmatrix} = \begin{bmatrix} 2 & 3 \\ 4 & 5 \end{bmatrix} \end{array}\end{array}$
 
-Square matrix $\to \begin {bmatrix} 0&0&0 \\ 0&0&0 \\ 0&0&0 \end{bmatrix} _{3X3}$ (Diagonal of a matrix, (i,i)th elements of square matrix)(we talk about diagonal only in the case of square matrix)
 
-Diagonal matrix $\to \begin {bmatrix} 1&0&0 \\ 0&2&0 \\ 0&0&3 \end{bmatrix} _{3X3}$(diagonal elements are non-zero and other elements are zero)
 
-Scaler matrix  $\to \begin {bmatrix} -3&0&0 \\ 0&-3&0 \\ 0&0&-3 \end{bmatrix}$ or $\begin {bmatrix} 0&0&0 \\ 0&0&0 \\ 0&0&0 \end{bmatrix}$or $\begin {bmatrix} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{bmatrix}$(only square matrix who’s diagonal elements are same)
+| Category | Matrix Type | Mathematical Definition & Properties | Illustrative Example / Structure |
+| :--- | :--- | :--- | :---: |
+| **1. Structural Shapes** | **Square Matrix** | $m = n$ (Equal rows and columns). **Note:** We only define the main diagonal (the $(i,i)$-th elements) for square matrices. | $\begin{bmatrix} 0 & 0 & 0 \\\ 0 & 0 & 0 \\\ 0 & 0 & 0 \end{bmatrix}_{3 \times 3}$ |
+| | **Rectangular Matrix** | $m \neq n$ (Rows do not equal columns) | — |
+| | **Row Vector** | Matrix of size $1 \times n$ | $\begin{bmatrix} a_1 & a_2 & \dots & a_n \end{bmatrix}$ |
+| | **Column Vector** | Matrix of size $m \times 1$ | $\begin{bmatrix} a_1 \\\ a_2 \\\ \vdots \\\ a_m \end{bmatrix}$ |
+| **2. Basic Entry-Based** | **Zero / Null Matrix ($O$)** | $a_{ij} = 0 \quad \forall \, i, j$ | — |
+| | **Identity Matrix ($I_n$)** | A scalar matrix whose main diagonal elements are all exactly $1$. | $\begin{bmatrix} 1 & 0 & 0 \\\ 0 & 1 & 0 \\\ 0 & 0 & 1 \end{bmatrix}$ |
+| | **Diagonal Matrix ($D$)** | All off-diagonal elements are zero ($a_{ij} = 0 \;\; \forall \, i \neq j$). The main diagonal elements are typically non-zero. | $\begin{bmatrix} 1 & 0 & 0 \\\ 0 & 2 & 0 \\\ 0 & 0 & 3 \end{bmatrix}_{3 \times 3}$ |
+| | **Scalar Matrix** | A square matrix where all diagonal elements are equal, and off-diagonal elements are zero ($a_{ij} = k \text{ if } i=j$). | $\begin{bmatrix} -3 & 0 & 0 \\\ 0 & -3 & 0 \\\ 0 & 0 & -3 \end{bmatrix}$ or $\begin{bmatrix} 0 & 0 & 0 \\\ 0 & 0 & 0 \\\ 0 & 0 & 0 \end{bmatrix}$ or $\begin{bmatrix} 1 & 0 & 0 \\\ 0 & 1 & 0 \\\ 0 & 0 & 1 \end{bmatrix}$ |
+| **3. Triangular Matrices** | **Upper Triangular** | All elements below the main diagonal are zero ($a_{ij} = 0 \quad \forall \, i > j$). | $\begin{bmatrix} 1 & 2 & 3 \\\ 0 & 4 & 5 \\\ 0 & 0 & 6 \end{bmatrix}$ |
+| | **Lower Triangular** | All elements above the main diagonal are zero ($a_{ij} = 0 \quad \forall \, i < j$). | $\begin{bmatrix} 1 & 0 & 0 \\\ 2 & 3 & 0 \\\ 4 & 5 & 6 \end{bmatrix}$ |
+| | **Strictly Triangular** | $a_{ij} = 0 \quad \forall \, i = j$ (Zeros all along the main diagonal). | — |
+| **4. Symmetry Operations**| **Symmetric Matrix** | Equal to its own transpose ($A = A^T \iff a_{ij} = a_{ji}$). | $\begin{bmatrix} 1 & 2 & 3 \\\ 2 & 4 & 5 \\\ 3 & 5 & 6 \end{bmatrix}$ |
+| | **Skew-Symmetric** | Equal to its negative transpose ($A = -A^T \iff a_{ij} = -a_{ji}$). **Note:** Main diagonal elements must be exactly $0$. | $\begin{bmatrix} 0 & 2 & -3 \\\ -2 & 0 & 5 \\\ 3 & -5 & 0 \end{bmatrix}$ |
+| | **Hermitian Matrix** | Equal to its complex conjugate transpose ($A^* = A \iff a_{ij} = \overline{a_{ji}}$). | — |
+| | **Skew-Hermitian** | Equal to its negative complex conjugate transpose ($A^* = -A \iff a_{ij} = -\overline{a_{ji}}$). | — |
+| **5. Operational & Spectral**| **Orthogonal Matrix** | $A^T A = A A^T = I \iff A^{-1} = A^T$ (Real orthonormal columns). | — |
+| | **Unitary Matrix** | $A^* A = A A^* = I \iff A^{-1} = A^*$ (Complex orthonormal columns). | — |
+| | **Normal Matrix** | $A^* A = A A^* \quad$ (Commutes with its conjugate transpose). | — |
+| | **Invertible / Regular** | $\det(A) \neq 0 \iff A^{-1} \text{ exists}$. | — |
+| | **Singular Matrix** | $\det(A) = 0 \iff \text{No inverse exists}$. | — |
+| **6. Algebraic Powers** | **Idempotent Matrix** | $A^2 = A \quad$ (Acts as a geometric projection). | — |
+| | **Nilpotent Matrix** | $A^k = O \quad$ for some positive integer $k$. | — |
+| | **Involutary Matrix** | $A^2 = I \iff A = A^{-1}$ (Acts as its own inverse matrix reflection). | — |
 
-Identity natrix $\to \begin {bmatrix} 1&0&0 \\ 0&1&0 \\ 0&0&1 \end{bmatrix}$ (diagonal elements are all ‘1’)
 
-Symmetric matrix $\to (A = A^T)$ $\to \begin {bmatrix} 1&2&3 \\ 2&4&5 \\ 3&5&6 \end{bmatrix}$
 
-skew-symmetric matrix $\to (A = -A^T)$$\to \begin {bmatrix} 0&2&-3 \\ -2&0&5 \\ 3&-5&0 \end{bmatrix}$
-
-upper triangular matrix $\to \begin {bmatrix} 1&2&3 \\ 0&4&5 \\ 0&0&6 \end{bmatrix}$
-
-lower triangular matrix $\to \begin {bmatrix} 1&0&0 \\ 2&3&0 \\ 4&5&6 \end{bmatrix}$
 
 - **Orthogonal Matrix**: An orthogonal matrix has columns that are orthonormal vectors, meaning they are perpendicular and have a length of one, while a unitary matrix can have complex entries and preserves inner products in a more general sense.
 - **Unitary Matrices**: These are similar to orthogonal matrices but can include complex numbers; their defining property is that their conjugate transpose is equal to their inverse.
@@ -46,6 +67,41 @@ lower triangular matrix $\to \begin {bmatrix} 1&0&0 \\ 2&3&0 \\ 4&5&6 \end{bmatr
 - **Skew-Symmetric Matrices**: These are square matrices that are equal to the negative of their own transpose, meaning that the elements satisfy the condition $A^T = -A$, which is the opposite of symmetric matrices.
 - **Diagonal Matrices**: While all symmetric matrices can be diagonal, not all diagonal matrices are symmetric; a diagonal matrix is symmetric only if its diagonal elements are equal.
 - **Orthogonal Matrices**: These are square matrices whose rows and columns are orthonormal vectors, which means that they can be symmetric, but they specifically satisfy the condition $A^T A = I$, where I is the identity matrix
+
+
+
+# Summary Table
+
+| Matrix Type | Defining Property |
+|-------------|-------------------|
+| Square | $m=n$ |
+| Rectangular | $m\ne n$ |
+| Zero | $a_{ij}=0$ |
+| Identity | $I$ |
+| Diagonal | $a_{ij}=0,\ i\ne j$ |
+| Scalar | $A=kI$ |
+| Upper Triangular | $a_{ij}=0,\ i>j$ |
+| Lower Triangular | $a_{ij}=0,\ i<j$ |
+| Symmetric | $A^T=A$ |
+| Skew-Symmetric | $A^T=-A$ |
+| Hermitian | $A^*=A$ |
+| Orthogonal | $A^TA=I$ |
+| Unitary | $A^*A=I$ |
+| Normal | $A^*A=AA^*$ |
+| Invertible | $\det(A)\ne0$ |
+| Singular | $\det(A)=0$ |
+| Idempotent | $A^2=A$ |
+| Nilpotent | $A^k=O$ |
+| Involutory | $A^2=I$ |
+| Positive Definite | $x^TAx>0$ |
+| Positive Semi-Definite | $x^TAx\ge0$ |
+| Projection | $P^2=P$ |
+
+
+
+
+
+
 
 ## Matrix Multiplication
 
@@ -118,7 +174,7 @@ $\begin{aligned}
 $\begin{aligned}
 &A = \begin{bmatrix} 1 & 2 & 2 & 0 \\ 2 & 1 & 2 & 1 \\ 0 & 2 & 1 & 2 \end{bmatrix}, \quad B = \begin{bmatrix} 1 & 2 \\ -2 & -1 \\ -1 & 2 \\ 2 & -2 \end{bmatrix} \\[2ex]
 &\begin{array}{ccc}
-\text{\bf Row 1} & \text{\bf Row 2} & \text{\bf Row 3} \\
+\text{ Row 1} & \text{ Row 2} & \text{ Row 3} \\
 \begin{aligned}
 &1 \begin{bmatrix} 1 & 2 \end{bmatrix} \\
 +\; &2 \begin{bmatrix} -2 & -1 \end{bmatrix} \\
@@ -378,7 +434,23 @@ $\det \left( cA\right) _{n\times n}=c^{n}\left| A\right|$
     
 - Add scaler multiple of one **row or column** to othor
     
-    $det\begin{bmatrix} 1&5&-7\\6&0&4\\2&3&5 \end{bmatrix} = det\begin{bmatrix} 1+k(2)&5+k(3)&-7+k(5)\\6&0&4\\2&3&5\end{bmatrix} \$ 
+
+$$ R_1 \rightarrow R_1 + kR_3 $$
+
+$$
+\det\begin{bmatrix}
+1 & 5 & -7\\
+6 & 0 & 4\\
+2 & 3 & 5
+\end{bmatrix}
+=
+\det\begin{bmatrix}
+1+2k & 5+3k & -7+5k\\
+6 & 0 & 4\\
+2 & 3 & 5
+\end{bmatrix}
+$$
+
     
 - Scalar multiplication of a row by a constant t multiplies the determinant by t.
     
@@ -489,3 +561,6 @@ now, let us take to example to understand how we can represent the systems using
 matrices.
 
 ## Linear equation
+
+
+

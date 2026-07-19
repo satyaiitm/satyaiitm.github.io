@@ -83,26 +83,63 @@ $A = \begin {bmatrix}a11&a12&a13\\
 a21 & a22 & a23 \\
 a31 & a32 & a33 \end {bmatrix} \ x=\begin {bmatrix} x_1 \\ x_2 \\ x_3 \end {bmatrix} \ b=\begin {bmatrix} b_1 \\ b_2 \\ b_3 \end {bmatrix}$
 
+
 $$
-\text{replace the first column with 'b' matrix}\\A_{x_1} = \begin {bmatrix}b_1&a12&a13\\
-b_2 & a22 & a23 \\
-b_3 & a32 & a33 \end {bmatrix} then, \cfrac {det(A_{x_1} )}{det(A)} = x_1  \\
-\text{replace the second column with 'b' matrix}\\  
-A_{x_2} = \begin {bmatrix}a11&b_1&a13\\
-a21 & b_2 & a23 \\
-a31 & b_3 & a33 \end {bmatrix}then, \cfrac {det(A_{x_2} )}{det(A)} = x_2  \\
-\text{replace the third column with 'b' matrix}\\ A_{x_3} = \begin {bmatrix}a11&a12&b_1\\
-a21 & a22 & b_2 \\
-a31 & a32 & b_3 \end {bmatrix}then, \cfrac {det(A_{x_3} )}{det(A)} = x_3  \\
-\text{the solution for the system is} \begin {bmatrix} x_1\\x_2\\x_3 \end {bmatrix}
+\begin{alignedat}{2}
+&\textbf{Replace the first column with }\mathbf{b} &&\\
+&A_{x_1}=
+\begin{bmatrix}
+b_1&a_{12}&a_{13}\\
+b_2&a_{22}&a_{23}\\
+b_3&a_{32}&a_{33}
+\end{bmatrix}
+&\qquad&
+x_1=\frac{\det(A_{x_1})}{\det(A)}
+\\[10pt]
+&\textbf{Replace the second column with }\mathbf{b} &&\\
+&A_{x_2}=
+\begin{bmatrix}
+a_{11}&b_1&a_{13}\\
+a_{21}&b_2&a_{23}\\
+a_{31}&b_3&a_{33}
+\end{bmatrix}
+&\qquad&
+x_2=\frac{\det(A_{x_2})}{\det(A)}
+\\[10pt]
+&\textbf{Replace the third column with }\mathbf{b} &&\\
+&A_{x_3}=
+\begin{bmatrix}
+a_{11}&a_{12}&b_1\\
+a_{21}&a_{22}&b_2\\
+a_{31}&a_{32}&b_3
+\end{bmatrix}
+&\qquad&
+x_3=\frac{\det(A_{x_3})}{\det(A)}
+\end{alignedat}
 $$
 
-Step 1: find $det(A)$
-Step 2: find $det(A_{x_1})$  and  $det(A_{x_2})$ and  $det(A_{x_3})$
 
-Step 3: devide $det(A_{x_2})$ by $det(A)$
 
-$\begin{aligned}x_1 = \cfrac {det(A_{x_1} )}{det(A)} , \\ & x_2 = \cfrac { det(A_{x_2} )}{det(A)} \\  and \ x_3 = \cfrac {det(A_{x_3} )}{det(A)}\end{aligned}$
+### Steps of Cramer's Rule
+
+1. Compute $\det(A)$.
+2. Compute $\det(A_{x_1})$, $\det(A_{x_2})$, and $\det(A_{x_3})$.
+3. Calculate
+
+$$
+x_i=\frac{\det(A_{x_i})}{\det(A)},
+\qquad i=1,2,3.
+$$
+
+That is,
+
+$$
+\begin{aligned}
+x_1 &= \frac{\det(A_{x_1})}{\det(A)},\\
+x_2 &= \frac{\det(A_{x_2})}{\det(A)},\\
+x_3 &= \frac{\det(A_{x_3})}{\det(A)}.
+\end{aligned}
+$$
 
 ### Finding the solution of a system of linear equations with an invertible coefficient matrix
 
@@ -151,9 +188,57 @@ $Ax=0$
 
 $x=A^{-1} 0 = 0$
 
+## Existence of Solutions
+
+An invertible matrix satisfies
+
 $$
-Invertable \implies \text{matrix A is squire and det(A) is non-zero}\\ \\  homogenious\begin{cases} invertable  & unique \ solution \\ not-invertable  &infinite \ solution \end{cases} \\ 
-non \ homogenious\begin{cases} invertable  & unique \ solution \\ not-invertable  &no/infinite \ solution \end{cases}  
+A \text{ is invertible}
+\iff
+\begin{cases}
+A \text{ is square},\\
+\det(A)\neq 0.
+\end{cases}
+$$
+
+---
+
+### Homogeneous System
+
+$$
+Ax=0
+$$
+
+$$
+\begin{cases}
+A \text{ is invertible}
+&\Longrightarrow&
+\text{Unique solution }(x=0),
+\\[8pt]
+A \text{ is not invertible}
+&\Longrightarrow&
+\text{Infinitely many solutions.}
+\end{cases}
+$$
+
+---
+
+### Non-Homogeneous System
+
+$$
+Ax=b
+$$
+
+$$
+\begin{cases}
+A \text{ is invertible}
+&\Longrightarrow&
+\text{Unique solution},
+\\[8pt]
+A \text{ is not invertible}
+&\Longrightarrow&
+\text{Either no solution or infinitely many solutions.}
+\end{cases}
 $$
 
 ## Gaussian elimination method
@@ -162,42 +247,380 @@ Ax=b from this system we create augmented matrix [A|b] and then perform row redu
 
 The solution of Ax=b is the solution of Rx=c
 
-| rank of [A|b] = rank of [R|c] = # of variable | Unique solution | $\begin{bmatrix}
-1 & 0 & 0 &| a\\
-0 & 1 & 0 &| b\\
-0 & 0 & 1 &| c
-\end{bmatrix}$ |
-| --- | --- | --- |
-| rank of [A|b] $\neq$ rank of [R|c]  | No solution | $\begin{bmatrix}
-1 & 0 & 0 &| a\\
-0 & 1 & 0 &| b\\
-0 & 0 & 0 &| c
-\end{bmatrix}$ |
-| rank of [A|b] = rank of [R|c] < # of variable (if there is free or independent variable there will be infinite solution) | Infinite solution | $\begin{bmatrix}
-1 & 0 & 0 &| a\\
-0 & 1 & 0 &| b\\
-0 & 0 & 0 &| 0
-\end{bmatrix}$ |
+!!! success "Unique Solution"
 
+**Condition**
+
+$$
+\operatorname{rank}(A)=\operatorname{rank}([A|b])=n
+$$
+
+$$
+\begin{bmatrix}
+1&0&0&|&a\\
+0&1&0&|&b\\
+0&0&1&|&c
+\end{bmatrix}
+$$
+
+---
+
+!!! failure "No Solution"
+
+**Condition**
+
+$$
+\operatorname{rank}(A)\ne\operatorname{rank}([A|b])
+$$
+
+$$
+\begin{bmatrix}
+1&0&0&|&a\\
+0&1&0&|&b\\
+0&0&0&|&c
+\end{bmatrix},
+\qquad c\ne0
+$$
+
+---
+
+!!! info "Infinitely Many Solutions"
+
+**Condition**
+
+$$
+\operatorname{rank}(A)=\operatorname{rank}([A|b])<n
+$$
+
+$$
+\begin{bmatrix}
+1&0&0&|&a\\
+0&1&0&|&b\\
+0&0&0&|&0
+\end{bmatrix}
+$$
+
+    At least one free variable exists.
 # **Vector**
 
 ## Vector Space
+# Vector Space
 
-$\textbf{Definition: Vector Space} \\[5pt]\text{A vector space over a field } \mathbb{F} \text{ (such as } \mathbb{R} \text{ or } \mathbb{C}\text{) is a set } V \text{ equipped with two operations:} \\[5pt]\begin{array}{ll}\text{1. Vector Addition:} & + : V \times V \to V \\\text{2. Scalar Multiplication:} & \cdot : \mathbb{F} \times V \to V\end{array}$
+## Definition
 
- $\\[10pt]\text{that satisfy the following eight axioms for all } \mathbf{u}, \mathbf{v}, \mathbf{w} \in V \text{ and } a, b \in \mathbb{F}: \\[8pt]\begin{aligned}&\textbf{Addition Axioms:} \\&\quad \text{• Associativity:} && \mathbf{u} + (\mathbf{v} + \mathbf{w}) = (\mathbf{u} + \mathbf{v}) + \mathbf{w} \\&\quad \text{• Commutativity:} && \mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u} \\&\quad \text{• Identity Element:} && \exists \, \mathbf{0} \in V \text{ such that } \mathbf{u} + \mathbf{0} = \mathbf{u} \\&\quad \text{• Inverse Element:} && \forall \, \mathbf{u} \in V, \exists \, (-\mathbf{u}) \in V \text{ such that } \mathbf{u} + (-\mathbf{u}) = \mathbf{0} \\[8pt]&\textbf{Scalar Multiplication Axioms:} \\&\quad \text{• Compatibility:} && a(b\mathbf{u}) = (ab)\mathbf{u} \\&\quad \text{• Identity Element:} && 1\mathbf{u} = \mathbf{u}, \text{ where } 1 \text{ is the multiplicative identity of } \mathbb{F} \\&\quad \text{• Distributivity (scalars):} && (a + b)\mathbf{u} = a\mathbf{u} + b\mathbf{u} \\&\quad \text{• Distributivity (vectors):} && a(\mathbf{u} + \mathbf{v}) = a\mathbf{u} + a\mathbf{v}\end{aligned}$
+A **vector space** over a field $\mathbb{F}$ (such as $\mathbb{R}$ or $\mathbb{C}$) is a set $V$ equipped with two operations:
 
-The set should be closed under $(+, .)$ instade of $\R^2$ if we take $\R^n$, it will still work iff the addition and multiplication rule is the same
+1. **Vector Addition**
 
-Example : $(\R^2,+,.)$
-$+ : \R^2 + \R^2 \to \R^2$
-                                  $(x_1,y_1) + (x_2,y_2) = (x_1+x_2 , y_1+y_2)$      usual addition
-$. : \R \times \R^2 \to \R^2$
-                                   $c(x,y) = (cx,cy)$                                            usual multiplication
+   $$
+   + : V \times V \rightarrow V
+   $$
 
+2. **Scalar Multiplication**
+
+   $$
+   \cdot : \mathbb{F} \times V \rightarrow V
+   $$
+
+These operations must satisfy the following axioms for all
+
+$$
+\mathbf{u},\mathbf{v},\mathbf{w}\in V
+\qquad\text{and}\qquad
+a,b\in\mathbb{F}.
+$$
+
+---
+
+# Vector Space Axioms
+
+## 1. Addition Axioms
+
+### Associativity
+
+$$
+\mathbf{u}+(\mathbf{v}+\mathbf{w})
+=
+(\mathbf{u}+\mathbf{v})+\mathbf{w}
+$$
+
+### Commutativity
+
+$$
+\mathbf{u}+\mathbf{v}
+=
+\mathbf{v}+\mathbf{u}
+$$
+
+### Additive Identity
+
+There exists a zero vector $\mathbf{0}\in V$ such that
+
+$$
+\mathbf{u}+\mathbf{0}
+=
+\mathbf{u}
+$$
+
+### Additive Inverse
+
+For every vector $\mathbf{u}\in V$, there exists $-\mathbf{u}\in V$ such that
+
+$$
+\mathbf{u}+(-\mathbf{u})
+=
+\mathbf{0}
+$$
+
+---
+
+## 2. Scalar Multiplication Axioms
+
+### Compatibility
+
+$$
+a(b\mathbf{u})
+=
+(ab)\mathbf{u}
+$$
+
+### Multiplicative Identity
+
+$$
+1\mathbf{u}
+=
+\mathbf{u}
+$$
+
+where $1$ is the multiplicative identity of $\mathbb{F}$.
+
+### Distributivity over Scalar Addition
+
+$$
+(a+b)\mathbf{u}
+=
+a\mathbf{u}+b\mathbf{u}
+$$
+
+### Distributivity over Vector Addition
+
+$$
+a(\mathbf{u}+\mathbf{v})
+=
+a\mathbf{u}+a\mathbf{v}
+$$
+
+---
+
+# Closure Property
+
+A set is a vector space only if it is **closed** under both operations:
+
+- Vector addition
+- Scalar multiplication
+
+That is,
+
+$$
+\mathbf{u},\mathbf{v}\in V
+\quad\Longrightarrow\quad
+\mathbf{u}+\mathbf{v}\in V
+$$
+
+and
+
+$$
+a\in\mathbb{F},
+\;
+\mathbf{u}\in V
+\quad\Longrightarrow\quad
+a\mathbf{u}\in V.
+$$
+
+---
+
+# Example
+
+Consider the vector space
+
+$$
+(\mathbb{R}^2,+,\cdot)
+$$
+
+where the operations are the usual addition and scalar multiplication.
+
+### Vector Addition
+
+$$
++:\mathbb{R}^2\times\mathbb{R}^2
+\rightarrow
+\mathbb{R}^2
+$$
+
+$$
+(x_1,y_1)+(x_2,y_2)
+=
+(x_1+x_2,\;y_1+y_2)
+$$
+
+### Scalar Multiplication
+
+$$
+\cdot:\mathbb{R}\times\mathbb{R}^2
+\rightarrow
+\mathbb{R}^2
+$$
+
+$$
+c(x,y)
+=
+(cx,cy)
+$$
+
+---
+
+## Important Note
+
+The vector space is **not defined by** $\mathbb{R}^2$ alone.
+
+It is defined by
+
+$$
+(V,+,\cdot)
+$$
+
+where:
+
+- $V$ is the set,
+- $+$ is the vector addition operation,
+- $\cdot$ is the scalar multiplication operation.
+
+For example,
+
+$$
+(\mathbb{R}^n,+,\cdot)
+$$
+
+is a vector space **only if** the addition and scalar multiplication satisfy all eight vector space axioms.
 ## Vector Subspace
 
-$\textbf{Definition: Vector Subspace} \\[5pt]\text{Let } V \text{ be a vector space over a field } \mathbb{F}. \text{ A subset } W \subseteq V \text{ is called a \textit{subspace} of } V \\[3pt]\text{if } W \text{ is itself a vector space over } \mathbb{F} \text{ under the addition and scalar multiplication defined on } V. \\[10pt]\text{Equivalently, } W \text{ is a subspace if and only if it satisfies the following three conditions:} \\[8pt]\begin{aligned}&\textbf{Subspace Criteria:} \\&\quad \text{1. Non-emptiness (Zero Vector):} && \mathbf{0} \in W \\&\quad \text{2. Closure under Addition:} && \forall \, \mathbf{u}, \mathbf{v} \in W \implies \mathbf{u} + \mathbf{v} \in W \\&\quad \text{3. Closure under Scalar Multiplication:} && \forall \, \mathbf{u} \in W \text{ and } \forall \, a \in \mathbb{F} \implies a\mathbf{u} \in W\end{aligned} \\[10pt]\text{Alternative Single-Step Test:} \quad \mathbf{0} \in W \quad \text{and} \quad \forall \, \mathbf{u}, \mathbf{v} \in W, \, \forall \, a, b \in \mathbb{F} \implies a\mathbf{u} + b\mathbf{v} \in W$
+# Vector Subspace
+
+## Definition
+
+Let $V$ be a vector space over a field $\mathbb{F}$.
+
+A subset
+
+$$
+W \subseteq V
+$$
+
+is called a **vector subspace** (or simply a **subspace**) of $V$ if $W$ itself is a vector space under the **same vector addition** and **same scalar multiplication** defined on $V$.
+
+---
+
+# Subspace Test
+
+A subset $W \subseteq V$ is a subspace **if and only if** it satisfies the following three conditions.
+
+## 1. Contains the Zero Vector
+
+$$
+\mathbf{0}\in W
+$$
+
+---
+
+## 2. Closed Under Addition
+
+For every
+
+$$
+\mathbf{u},\mathbf{v}\in W,
+$$
+
+their sum also belongs to $W$.
+
+$$
+\mathbf{u}+\mathbf{v}\in W
+$$
+
+---
+
+## 3. Closed Under Scalar Multiplication
+
+For every
+
+$$
+\mathbf{u}\in W
+\quad\text{and}\quad
+a\in\mathbb{F},
+$$
+
+the scalar multiple also belongs to $W$.
+
+$$
+a\mathbf{u}\in W
+$$
+
+---
+
+# Alternative One-Step Test
+
+Instead of checking closure under addition and scalar multiplication separately, we can verify the following condition.
+
+If
+
+$$
+\mathbf{0}\in W,
+$$
+
+and for every
+
+$$
+\mathbf{u},\mathbf{v}\in W,
+\qquad
+a,b\in\mathbb{F},
+$$
+
+we have
+
+$$
+a\mathbf{u}+b\mathbf{v}\in W,
+$$
+
+then $W$ is a subspace of $V$.
+
+---
+
+# Summary
+
+A subset $W$ is a subspace of $V$ if it satisfies:
+
+| Condition | Mathematical Form |
+|-----------|-------------------|
+| Contains the zero vector | $\mathbf{0}\in W$ |
+| Closed under addition | $\mathbf{u},\mathbf{v}\in W \Rightarrow \mathbf{u}+\mathbf{v}\in W$ |
+| Closed under scalar multiplication | $\mathbf{u}\in W,\ a\in\mathbb{F}\Rightarrow a\mathbf{u}\in W$ |
+
+---
+
+!!! tip "Quick Memory Trick"
+
+To check whether a subset is a subspace, remember **ZAS**:
+
+- **Z** → Zero vector belongs to the set.
+- **A** → Closed under Addition.
+- **S** → Closed under Scalar multiplication.
+
+Or use the **one-step test**:
+
+$$
+a\mathbf{u}+b\mathbf{v}\in W
+$$
+
+for all $\mathbf{u},\mathbf{v}\in W$ and all scalars $a,b$.
 
 ## linear combination
 
@@ -207,7 +630,250 @@ Note that the linear combination of a set of vectors is another vector in V , si
 
 ## Linear Dependence and Independence
 
-$\textbf{Definition: Linear Dependence and Independence} \\[5pt]\text{Let } \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_k\} \text{ be a set of vectors in a vector space } V \text{ over a field } \mathbb{F}. \\[3pt]\text{Consider the vector equation (the linear combination equal to zero):} \\[8pt]\quad c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \dots + c_k\mathbf{v}_k = \mathbf{0} \quad \text{where } c_1, c_2, \dots, c_k \in \mathbb{F} \\[12pt]\begin{aligned}&\textbf{1. Linearly Independent} \\&\quad \text{• Condition:} && \text{The equation has } \textit{only} \text{ the trivial solution:} \\&\quad \text{• Result:} && c_1 = c_2 = \dots = c_k = 0 \\[8pt]&\textbf{2. Linearly Dependent} \\&\quad \text{• Condition:} && \text{The equation has a non-trivial solution.} \\&\quad \text{• Result:} && \exists \, c_i \neq 0 \text{ for at least one } i \in \{1, \dots, k\}\end{aligned} \\[12pt]\textbf{The Matrix Test (for } \mathbb{R}^n\textbf{):} \quad \text{Form matrix } A = [\mathbf{v}_1 \ \mathbf{v}_2 \ \dots \ \mathbf{v}_k]. \text{ The vectors are:} \\\quad \text{• Linearly Independent } \iff \det(A) \neq 0 \quad (\text{if } A \text{ is square}) \iff \text{Rank}(A) = k \\\quad \text{• Linearly Dependent } \ \, \iff \det(A) = 0 \quad (\text{if } A \text{ is square}) \iff \text{Rank}(A) < k$
+# Linear Dependence and Independence
+
+## Definition
+
+Let
+
+$$
+\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_k\}
+$$
+
+be a set of vectors in a vector space $V$ over a field $\mathbb{F}$.
+
+Consider the linear combination
+
+$$
+c_1\mathbf{v}_1
++c_2\mathbf{v}_2
++\cdots
++c_k\mathbf{v}_k
+=
+\mathbf{0},
+\qquad
+c_1,c_2,\ldots,c_k\in\mathbb{F}.
+$$
+
+---
+
+# Linearly Independent
+
+The vectors are **linearly independent** if the above equation has **only the trivial solution**.
+
+That is,
+
+$$
+c_1=c_2=\cdots=c_k=0.
+$$
+
+Equivalently,
+
+> No vector in the set can be written as a linear combination of the others.
+
+---
+
+# Linearly Dependent
+
+The vectors are **linearly dependent** if the equation has a **non-trivial solution**.
+
+That is,
+
+$$
+\exists\; c_i\neq0
+\quad
+\text{for at least one } i.
+$$
+
+Equivalently,
+
+> At least one vector can be expressed as a linear combination of the remaining vectors.
+
+---
+
+# Matrix Test
+
+Construct the matrix
+
+$$
+A=
+\begin{bmatrix}
+| & | & & |\\
+\mathbf{v}_1 & \mathbf{v}_2 & \cdots & \mathbf{v}_k\\
+| & | & & |
+\end{bmatrix}.
+$$
+
+Then:
+
+## If $A$ is Square
+
+### Linearly Independent
+
+$$
+\det(A)\neq0
+$$
+
+or equivalently,
+
+$$
+\operatorname{rank}(A)=k.
+$$
+
+---
+
+### Linearly Dependent
+
+$$
+\det(A)=0
+$$
+
+or equivalently,
+
+$$
+\operatorname{rank}(A)<k.
+$$
+
+---
+
+# General Rank Test
+
+The determinant test works **only for square matrices**.
+
+The rank test works for **every matrix**.
+
+| Condition | Conclusion |
+|-----------|------------|
+| $\operatorname{rank}(A)=k$ | Linearly Independent |
+| $\operatorname{rank}(A)<k$ | Linearly Dependent |
+
+where $k$ is the number of vectors (columns).
+
+---
+
+# Intuition
+
+## Independent
+
+Each vector contributes a **new direction**.
+
+```text
+v₁ ↗
+
+v₂ →
+
+v₃ ↑
+```
+
+None of them can be created using the others.
+
+---
+
+## Dependent
+
+One vector is redundant.
+
+```text
+v₃ = 2v₁ - v₂
+```
+
+So the set contains unnecessary information.
+
+---
+
+# Example 1 (Independent)
+
+Consider
+
+$$
+\mathbf{v}_1=
+\begin{bmatrix}
+1\\0
+\end{bmatrix},
+\qquad
+\mathbf{v}_2=
+\begin{bmatrix}
+0\\1
+\end{bmatrix}.
+$$
+
+Then
+
+$$
+A=
+\begin{bmatrix}
+1&0\\
+0&1
+\end{bmatrix},
+$$
+
+and
+
+$$
+\det(A)=1\neq0.
+$$
+
+Hence, the vectors are **linearly independent**.
+
+---
+
+# Example 2 (Dependent)
+
+Consider
+
+$$
+\mathbf{v}_1=
+\begin{bmatrix}
+1\\2
+\end{bmatrix},
+\qquad
+\mathbf{v}_2=
+\begin{bmatrix}
+2\\4
+\end{bmatrix}.
+$$
+
+Since
+
+$$
+\mathbf{v}_2=2\mathbf{v}_1,
+$$
+
+the vectors are **linearly dependent**.
+
+The corresponding matrix is
+
+$$
+A=
+\begin{bmatrix}
+1&2\\
+2&4
+\end{bmatrix},
+$$
+
+and
+
+$$
+\det(A)=0.
+$$
+
+---
+
+## Quick Summary
+
+| Property | Linearly Independent | Linearly Dependent |
+|----------|----------------------|--------------------|
+| Solution of $A\mathbf{x}=0$ | Only trivial solution | Non-trivial solution exists |
+| Determinant (square matrix) | $\det(A)\neq0$ | $\det(A)=0$ |
+| Rank | $\operatorname{rank}(A)=k$ | $\operatorname{rank}(A)<k$ |
+| Redundant vectors | No | Yes |
+| Basis candidate | Yes | No |
+
+!!! tip "Memory Trick"
+
+**Independent → "Nothing can be removed."**
+
+**Dependent → "At least one vector is unnecessary."**
 
 ## Linear dependence
 
@@ -293,7 +959,205 @@ solution and hence the set is linearly independent.
 
 # Span and Basis
 
-$\textbf{Definitions: Span and Basis} \\[5pt]\text{Let } S = \{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_k\} \text{ be a set of vectors in a vector space } V \text{ over a field } \mathbb{F}. \\[12pt]\begin{aligned}&\textbf{1. The Span of a Set} \\&\quad \text{• Definition:} && \text{The set of all possible linear combinations of the vectors in } S. \\&\quad \text{• Notation:} && \text{Span}(S) = \{ c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \dots + c_k\mathbf{v}_k \mid c_i \in \mathbb{F} \} \\&\quad \text{• Property:} && \text{Span}(S) \text{ is always a subspace of } V. \\[10pt]&\textbf{2. Basis of a Vector Space} \\&\quad \text{• Definition:} && S \text{ is called a \textit{basis} for } V \text{ if it satisfies two strict conditions:} \\&\quad \text{• Condition 1:} && S \text{ is linearly independent.} \\&\quad \text{• Condition 2:} && \text{Span}(S) = V \quad (\text{the vectors span the entire space}).\end{aligned} \\[12pt]\textbf{Dimension (}\dim(V)\textbf{):} \quad \text{The number of vectors in any basis of } V. \text{ If a basis has } k \text{ vectors, } \dim(V) = k. \\[8pt]\text{Standard Bases Examples:} \\\quad \text{• For } \mathbb{R}^n: \quad \mathcal{E} = \{\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n\} \text{ where } \mathbf{e}_i \text{ are columns of the identity matrix } I_n. \\\quad \text{• For } \mathcal{P}_n: \quad \mathcal{B} = \{1, x, x^2, \dots, x^n\} \quad (\text{dimension is } n+1).$
+# Span and Basis
+
+## Span
+
+Let
+
+$$
+S=\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_k\}
+$$
+
+be a set of vectors in a vector space $V$ over a field $\mathbb{F}$.
+
+The **span** of $S$ is the set of all possible linear combinations of the vectors in $S$.
+
+$$
+\operatorname{Span}(S)
+=
+\left\{
+c_1\mathbf{v}_1+c_2\mathbf{v}_2+\cdots+c_k\mathbf{v}_k
+\;\middle|\;
+c_i\in\mathbb{F}
+\right\}
+$$
+
+### Property
+
+$$
+\operatorname{Span}(S)
+$$
+
+is always a **subspace** of $V$.
+
+---
+
+# Basis
+
+A set
+
+$$
+S=\{\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_k\}
+$$
+
+is called a **basis** of a vector space $V$ if it satisfies **both** of the following conditions.
+
+## 1. Linear Independence
+
+The vectors in $S$ are linearly independent.
+
+---
+
+## 2. Spanning Property
+
+The vectors span the entire vector space.
+
+$$
+\operatorname{Span}(S)=V
+$$
+
+---
+
+# Dimension
+
+The **dimension** of a vector space $V$, denoted by
+
+$$
+\dim(V),
+$$
+
+is the **number of vectors in any basis** of $V$.
+
+If a basis contains $k$ vectors, then
+
+$$
+\boxed{\dim(V)=k.}
+$$
+
+---
+
+# Standard Bases
+
+## Standard Basis of $\mathbb{R}^n$
+
+The standard basis is
+
+$$
+\mathcal{E}
+=
+\{\mathbf{e}_1,\mathbf{e}_2,\ldots,\mathbf{e}_n\},
+$$
+
+where
+
+$$
+\mathbf{e}_i
+=
+\begin{bmatrix}
+0\\
+\vdots\\
+1\\
+\vdots\\
+0
+\end{bmatrix}
+$$
+
+(the $i^{\text{th}}$ entry is 1 and all others are 0).
+
+For example,
+
+$$
+\mathbb{R}^3:
+\qquad
+\mathbf{e}_1=
+\begin{bmatrix}
+1\\0\\0
+\end{bmatrix},
+\quad
+\mathbf{e}_2=
+\begin{bmatrix}
+0\\1\\0
+\end{bmatrix},
+\quad
+\mathbf{e}_3=
+\begin{bmatrix}
+0\\0\\1
+\end{bmatrix}.
+$$
+
+---
+
+## Standard Basis of the Polynomial Space
+
+For
+
+$$
+\mathcal{P}_n,
+$$
+
+the standard basis is
+
+$$
+\mathcal{B}
+=
+\{1,x,x^2,\ldots,x^n\}.
+$$
+
+Therefore,
+
+$$
+\boxed{\dim(\mathcal{P}_n)=n+1.}
+$$
+
+---
+
+# Relationship Between Span, Basis, and Dimension
+
+```mermaid
+flowchart LR
+    A[Set of Vectors]
+    B[Span]
+    C[Vector Space]
+    D[Linearly Independent]
+    E[Basis]
+    F[Dimension]
+
+    A --> B
+    B --> C
+    A --> D
+    B --> E
+    D --> E
+    E --> F
+```
+
+---
+
+# Summary
+
+| Concept | Meaning |
+|----------|---------|
+| **Span** | All possible linear combinations of a set of vectors |
+| **Basis** | A linearly independent set that spans the entire vector space |
+| **Dimension** | Number of vectors in a basis |
+| **Standard Basis of $\mathbb{R}^n$** | $\{\mathbf{e}_1,\mathbf{e}_2,\ldots,\mathbf{e}_n\}$ |
+| **Standard Basis of $\mathcal{P}_n$** | $\{1,x,x^2,\ldots,x^n\}$ |
+
+---
+
+!!! tip "Memory Trick"
+
+**Span → Reach**
+
+> "What vectors can I **reach** using linear combinations?"
+
+**Basis → Minimum Reach**
+
+> "The **smallest independent set** that can reach every vector."
+
+**Dimension → Count**
+
+> "How many vectors are needed in a basis?"
 
 # Spanning sets
 
@@ -393,9 +1257,183 @@ $\textbf{Example:} \text{ Find the rank of the matrix } \rho(A) \text{ if } A = 
 
 # The Four Fundamental Subspaces
 
-$\textbf{The Four Fundamental Subspaces} \\[5pt]\text{Let } A \text{ be an } m \times n \text{ matrix over the field } \mathbb{R}. \text{ It maps vectors from } \mathbb{R}^n \text{ to } \mathbb{R}^m. \\[12pt]\begin{array}{llll}\textbf{Subspace} & \textbf{Notation} & \textbf{Definition / Set Notation} & \textbf{Dimension} \\ \hline\text{1. Column Space (Range)} & \mathcal{C}(A) & \{ \mathbf{b} \in \mathbb{R}^m \mid \mathbf{b} = A\mathbf{x} \text{ for some } \mathbf{x} \in \mathbb{R}^n \} & r \\\text{2. Row Space} & \mathcal{C}(A^T) & \{ \mathbf{y} \in \mathbb{R}^n \mid \mathbf{y} = A^T\mathbf{w} \text{ for some } \mathbf{w} \in \mathbb{R}^m \} & r \\\text{3. Nullspace (Kernel)} & \mathcal{N}(A) & \{ \mathbf{x} \in \mathbb{R}^n \mid A\mathbf{x} = \mathbf{0} \} & n - r \\\text{4. Left Nullspace} & \mathcal{N}(A^T) & \{ \mathbf{y} \in \mathbb{R}^m \mid A^T\mathbf{y} = \mathbf{0} \} & m - r\end{array} \\$
+# The Four Fundamental Subspaces
 
-$\begin{aligned}&\textbf{Fundamental Orthogonality Relations (The Big Picture):} \\&\quad \text{• In } \mathbb{R}^n: \quad \text{The Row Space and Nullspace are orthogonal complements:} \quad \mathcal{C}(A^T) \perp \mathcal{N}(A) \\&\quad \text{• In } \mathbb{R}^m: \quad  \text{The Column Space and Left Nullspace are orthogonal complements:} \quad \mathcal{C}(A) \perp \mathcal{N}(A^T)\end{aligned} \\[12pt]\textbf{Rank-Nullity Theorem:} \quad \dim(\mathcal{C}(A)) + \dim(\mathcal{N}(A)) = r + (n - r) = n \quad (\text{Total Columns})$
+Let
+
+$$
+A \in \mathbb{R}^{m\times n}
+$$
+
+be a matrix of rank
+
+$$
+r.
+$$
+
+The matrix $A$ maps vectors from
+
+$$
+\mathbb{R}^n \longrightarrow \mathbb{R}^m.
+$$
+
+There are **four fundamental subspaces** associated with every matrix.
+
+---
+
+# The Four Subspaces
+
+| Subspace | Notation | Definition | Dimension |
+|----------|----------|------------|-----------|
+| **Column Space (Range)** | $\mathcal{C}(A)$ | $\{\mathbf{b}\in\mathbb{R}^m \mid \mathbf{b}=A\mathbf{x},\ \mathbf{x}\in\mathbb{R}^n\}$ | $r$ |
+| **Row Space** | $\mathcal{C}(A^T)$ | $\{\mathbf{y}\in\mathbb{R}^n \mid \mathbf{y}=A^T\mathbf{w},\ \mathbf{w}\in\mathbb{R}^m\}$ | $r$ |
+| **Null Space (Kernel)** | $\mathcal{N}(A)$ | $\{\mathbf{x}\in\mathbb{R}^n \mid A\mathbf{x}=\mathbf{0}\}$ | $n-r$ |
+| **Left Null Space** | $\mathcal{N}(A^T)$ | $\{\mathbf{y}\in\mathbb{R}^m \mid A^T\mathbf{y}=\mathbf{0}\}$ | $m-r$ |
+
+---
+
+# Where Do They Live?
+
+| Subspace | Lives In |
+|----------|----------|
+| Column Space | $\mathbb{R}^m$ |
+| Left Null Space | $\mathbb{R}^m$ |
+| Row Space | $\mathbb{R}^n$ |
+| Null Space | $\mathbb{R}^n$ |
+
+---
+
+# Visual Picture
+
+```mermaid
+flowchart LR
+
+A["ℝⁿ"]
+
+RS["Row Space<br>𝓒(Aᵀ)"]
+NS["Null Space<br>𝓝(A)"]
+
+CS["Column Space<br>𝓒(A)"]
+LNS["Left Null Space<br>𝓝(Aᵀ)"]
+
+B["ℝᵐ"]
+
+A --> RS
+A --> NS
+
+CS --> B
+LNS --> B
+```
+
+---
+
+# Orthogonality Relations
+
+## In $\mathbb{R}^n$
+
+The **Row Space** and **Null Space** are orthogonal complements.
+
+$$
+\boxed{
+\mathcal{C}(A^T)
+\perp
+\mathcal{N}(A)
+}
+$$
+
+---
+
+## In $\mathbb{R}^m$
+
+The **Column Space** and **Left Null Space** are orthogonal complements.
+
+$$
+\boxed{
+\mathcal{C}(A)
+\perp
+\mathcal{N}(A^T)
+}
+$$
+
+---
+
+# Rank–Nullity Theorem
+
+Since
+
+$$
+\dim(\mathcal{C}(A))=r
+$$
+
+and
+
+$$
+\dim(\mathcal{N}(A))=n-r,
+$$
+
+we obtain
+
+$$
+\boxed{
+\dim(\mathcal{C}(A))
++
+\dim(\mathcal{N}(A))
+=
+r+(n-r)
+=
+n
+}
+$$
+
+Similarly,
+
+$$
+\boxed{
+\dim(\mathcal{C}(A^T))
++
+\dim(\mathcal{N}(A^T))
+=
+r+(m-r)
+=
+m
+}
+$$
+
+---
+
+# Relationships
+
+| Property | Formula |
+|----------|---------|
+| Rank | $\dim(\mathcal{C}(A))=\dim(\mathcal{C}(A^T))=r$ |
+| Nullity | $\dim(\mathcal{N}(A))=n-r$ |
+| Left Nullity | $\dim(\mathcal{N}(A^T))=m-r$ |
+| Rank–Nullity | $r+(n-r)=n$ |
+| Row Space ⟂ Null Space | $\mathcal{C}(A^T)\perp\mathcal{N}(A)$ |
+| Column Space ⟂ Left Null Space | $\mathcal{C}(A)\perp\mathcal{N}(A^T)$ |
+
+---
+
+!!! info "Memory Trick"
+
+Think of the four subspaces in **pairs**.
+
+**Inside $\mathbb{R}^n$**
+- Row Space
+- Null Space
+
+These are orthogonal complements.
+
+**Inside $\mathbb{R}^m$**
+- Column Space
+- Left Null Space
+
+These are also orthogonal complements.
+
+The dimensions of each pair always add up to the dimension of the ambient space.
+
+- $r+(n-r)=n$
+- $r+(m-r)=m$
 
 ## Column Space
 
@@ -439,42 +1477,578 @@ Key points about the row space:
 5. The row space provides insight into the relationships between the rows of the matrix and helps in understanding the structure and properties of the matrix.
 
 In summary, the row space of a matrix is the vector subspace spanned by its rows, and it is a fundamental concept in linear algebra used to analyze the properties and behavior of matrices in various mathematical and practical contexts.
+# Row Space
+
+## Definition
+
+The **row space** of a matrix $A$ is the subspace spanned by the rows of $A$.
 
 $$
-\text{Row space}(A) = \text{span}\{\text{Rows of } A\} \\[8pt]\text{A in RREF} = \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 0 \end{bmatrix} \\[10pt]\begin{aligned}\text{Row space of }(A) &= \text{span}\{(1,0,1), (0,1,1), (0,0,0)\} \\[5pt]&= \{ \alpha(1,0,1) + \beta(0,1,1) \mid \alpha, \beta \in \mathbb{R} \} \\[5pt]&= \{ (\alpha, \beta, \alpha + \beta) \mid \alpha, \beta \in \mathbb{R} \} \\&\quad\ \ \begin{array}{ccc} \uparrow & \uparrow & \uparrow \\[-2pt] x & y & z \end{array} \\[5pt]&= \{ (x,y,z) \mid z = x+y, \, x,y,z \in \mathbb{R} \} \\[5pt]&= \{ (x,y,z) \mid x+y-z = 0, \, x,y,z \in \mathbb{R} \}\end{aligned} \\[12pt]\dim(\text{Row space }(A)) = \text{Rank}(A) \\[5pt]\text{basis}(\text{Row space }(A)) = \{(1,0,1), (0,1,1)\}
+\operatorname{Row}(A)
+=
+\operatorname{span}
+\{\text{rows of }A\}
+$$
+
+---
+
+## Example
+
+Suppose
+
+$$
+\operatorname{rref}(A)=
+\begin{bmatrix}
+1&0&1\\
+0&1&1\\
+0&0&0
+\end{bmatrix}.
+$$
+
+The row space is
+
+$$
+\operatorname{Row}(A)
+=
+\operatorname{span}
+\{
+(1,0,1),
+(0,1,1)
+\}.
+$$
+
+(The zero row is ignored.)
+
+A general vector in the row space is
+
+$$
+\alpha(1,0,1)
++
+\beta(0,1,1),
+\qquad
+\alpha,\beta\in\mathbb R.
+$$
+
+Simplifying,
+
+$$
+=
+(\alpha,\beta,\alpha+\beta).
+$$
+
+Let
+
+$$
+x=\alpha,\qquad
+y=\beta,\qquad
+z=\alpha+\beta.
+$$
+
+Then
+
+$$
+\boxed{
+\operatorname{Row}(A)
+=
+\{
+(x,y,z)\in\mathbb R^3
+\mid
+z=x+y
+\}.
+}
+$$
+
+or equivalently,
+
+$$
+\boxed{
+x+y-z=0.
+}
+$$
+
+---
+
+## Dimension
+
+$$
+\boxed{
+\dim(\operatorname{Row}(A))
+=
+\operatorname{rank}(A)
+}
+$$
+
+---
+
+## Basis
+
+$$
+\boxed{
+\{
+(1,0,1),
+(0,1,1)
+\}
+}
+$$
+
+---
+
+# Larger Example
+
+Let
+
+$$
+A=
+\begin{bmatrix}
+-3&6&-1&1&7\\
+1&-2&2&3&-1\\
+2&-4&5&8&-4
+\end{bmatrix}.
+$$
+
+Its reduced row echelon form is
+
+$$
+\operatorname{rref}(A)=
+\begin{bmatrix}
+1&-2&0&-1&3\\
+0&0&1&2&-2\\
+0&0&0&0&0
+\end{bmatrix}.
+$$
+
+---
+
+# Basis of the Row Space
+
+The basis consists of the **non-zero rows** of the RREF.
+
+$$
+u_1=
+(1,-2,0,-1,3)
 $$
 
 $$
-A =\begin{bmatrix}-3& 6 & -1 & 1 &7  \\1 & -2 & 2 & 3 & -1 \\ 2&-4  & 5 &8  & -4\end{bmatrix} \sim \begin{bmatrix} 1& -2 & 0 & -1 & 3 \\0& 0 & 1 & 2 & -2 \\ 0& 0 &0  &0  & 0\end{bmatrix} = rref(A)
+u_2=
+(0,0,1,2,-2)
+$$
+
+Hence,
+
+$$
+\boxed{
+\operatorname{Basis}(\operatorname{Row}(A))
+=
+\{u_1,u_2\}
+}
+$$
+
+Since each row has five components,
+
+$$
+u_1,u_2\in\mathbb R^5.
+$$
+
+---
+
+# Column Space
+
+## Important Rule
+
+The pivot columns are identified from the **RREF**, but the basis vectors are taken from the **original matrix**.
+
+---
+
+The pivot columns of
+
+$$
+\operatorname{rref}(A)
+=
+\begin{bmatrix}
+\boxed{1}&-2&\boxed{0}&-1&3\\
+0&0&\boxed{1}&2&-2\\
+0&0&0&0&0
+\end{bmatrix}
+$$
+
+are
+
+- Column 1
+- Column 3
+
+Therefore, the basis vectors come from **Columns 1 and 3 of the original matrix**.
+
+$$
+v_1=
+\begin{bmatrix}
+-3\\
+1\\
+2
+\end{bmatrix}
 $$
 
 $$
-\text{Row Space= row(A) = non-zero rows of rref(A)} \\
-\begin{matrix}\to & 1 & -2 & 0 & -1 & 3 \\\to & 0 & 0 & 1 & 2 & -2 \\  & 0& 0 &0  &0  & 0\end{matrix} \\
-
-\text{Row space of A, is formed by the non-zero rows of rref(A)}\\
-
-u_1 = [1,-2,0,-1,3]\\
-u_2 =[0,0,1,2,-2]\\
-\text{$u_1,u_2$ are the basis of row(A)} \in \R^5
+v_2=
+\begin{bmatrix}
+-1\\
+2\\
+5
+\end{bmatrix}
 $$
 
+Hence,
+
 $$
-\text{Column Space = col(A)= pivot columns of rref(A)}\\
-\begin{matrix}\downarrow &&\downarrow \\\color{Red} 1 & -2 & 0 & -1 & 3 \\ 0 & 0 & \color{Red} 1 & 2 & -2 \\ 0& 0 &0  &0  & 0\end{matrix}\\
-\text{Column Space of A, is formed by the columns of the rref(A) that holds the 'pivots'}\\
-v_1 = \begin{bmatrix} -3 \\1  \\ 2\end{bmatrix}
-v_2 = \begin{bmatrix} -1 \\ 2 \\ 5\end{bmatrix}\\
-\text{$v_1,v_2$ are the basis of column(A)} \in \R^3
+\boxed{
+\operatorname{Basis}(\operatorname{Col}(A))
+=
+\{v_1,v_2\}
+}
 $$
 
-!Untitled
+Since each vector has three entries,
 
-!Screenshot_20231031-201627_Meet.jpg
+$$
+v_1,v_2\in\mathbb R^3.
+$$
 
-## Null Space (Kernel)
+---
 
-$\textbf{Definition: Null Space (Kernel)} \\[5pt]\text{Let } A \text{ be an } m \times n \text{ matrix. The \textit{null space} of } A \text{, denoted as } \mathcal{N}(A) \text{ or } \text{Null}(A)\text{,} \\[3pt]\text{is the set of all vectors } \mathbf{x} \in \mathbb{R}^n \text{ that map to the zero vector } \mathbf{0} \in \mathbb{R}^m \text{ under the transformation } A\mathbf{x}. \\[10pt]\begin{aligned}&\textbf{Mathematical Formulations:} \\&\quad \text{• Set-Builder Notation:} && \mathcal{N}(A) = \{ \mathbf{x} \in \mathbb{R}^n \mid A\mathbf{x} = \mathbf{0} \} \\&\quad \text{• Subspace Status:} && \mathcal{N}(A) \text{ is a valid subspace of the domain } \mathbb{R}^n. \\&\quad \text{• Dimension (Nullity):} && \dim(\mathcal{N}(A)) = n - r \quad (\text{where } n \text{ is total columns, } r \text{ is the rank}).\end{aligned} \\[12pt]\textbf{How to Find the Null Space Basis (Algorithm):} \\[5pt]\begin{aligned}&\quad \text{1. Row Reduce:} && \text{Convert the matrix } A \text{ to its Reduced Row Echelon Form (RREF).} \\&\quad \text{2. Identify Variables:} && \text{Find the pivot columns (leading 1s) and the free variables.} \\&\quad \text{3. Parametric Form:} && \text{Solve } A\mathbf{x} = \mathbf{0} \text{ by expressing the pivot variables in terms of free variables.} \\&\quad \text{4. Extract Vectors:} && \text{Factor out the free variables to get the basis vectors of } \mathcal{N}(A).\end{aligned}$
+# Summary
+
+| Subspace | How to Find the Basis |
+|-----------|-----------------------|
+| **Row Space** | Non-zero rows of $\operatorname{rref}(A)$ |
+| **Column Space** | Pivot columns of the **original** matrix (pivot locations found from $\operatorname{rref}(A)$) |
+| **Null Space** | Solve $A\mathbf{x}=0$ |
+| **Left Null Space** | Solve $A^T\mathbf{y}=0$ |
+
+!!! warning "Common Mistake"
+
+**Row Space:** Use the **non-zero rows of the RREF**.
+
+**Column Space:** **Do not** use the columns of the RREF.
+
+Find the pivot positions from the RREF, then take the corresponding columns from the **original matrix**.
+
+> **RREF tells you *which columns*.**
+>
+> **The original matrix gives you *the basis vectors*.**
+
+# Null Space (Kernel)
+
+# Null Space (Kernel)
+
+## Definition
+
+Let
+
+$$
+A \in \mathbb{R}^{m\times n}.
+$$
+
+The **null space** (or **kernel**) of $A$, denoted by
+
+$$
+\mathcal{N}(A)
+\quad\text{or}\quad
+\operatorname{Null}(A),
+$$
+
+is the set of all vectors
+
+$$
+\mathbf{x}\in\mathbb{R}^n
+$$
+
+that satisfy
+
+$$
+A\mathbf{x}=\mathbf{0}.
+$$
+
+---
+
+## Mathematical Definition
+
+The null space is
+
+$$
+\boxed{
+\mathcal{N}(A)
+=
+\{
+\mathbf{x}\in\mathbb{R}^n
+\mid
+A\mathbf{x}=\mathbf{0}
+\}.
+}
+$$
+
+---
+
+## Important Properties
+
+### 1. Subspace
+
+The null space is always a **subspace** of the domain.
+
+$$
+\boxed{
+\mathcal{N}(A)\subseteq\mathbb{R}^n
+}
+$$
+
+---
+
+### 2. Dimension (Nullity)
+
+If
+
+- $n$ = number of columns of $A$
+- $r$ = rank of $A$
+
+then
+
+$$
+\boxed{
+\dim(\mathcal{N}(A))
+=
+n-r.
+}
+$$
+
+This quantity is called the **nullity** of the matrix.
+
+---
+
+# How to Find the Null Space
+
+## Step 1
+
+Reduce the matrix to **Reduced Row Echelon Form (RREF)**.
+
+$$
+A
+\longrightarrow
+\operatorname{rref}(A)
+$$
+
+---
+
+## Step 2
+
+Identify
+
+- Pivot columns
+- Free variables
+
+---
+
+## Step 3
+
+Solve the homogeneous system
+
+$$
+A\mathbf{x}
+=
+\mathbf{0}
+$$
+
+Express every pivot variable in terms of the free variables.
+
+---
+
+## Step 4
+
+Write the solution in parametric vector form.
+
+Example
+
+$$
+\mathbf{x}
+=
+s
+\begin{bmatrix}
+1\\
+0\\
+2
+\end{bmatrix}
++
+t
+\begin{bmatrix}
+0\\
+1\\
+-1
+\end{bmatrix}.
+$$
+
+---
+
+## Step 5
+
+The vectors multiplying the free parameters form a basis of the null space.
+
+Hence,
+
+$$
+\boxed{
+\operatorname{Basis}(\mathcal{N}(A))
+=
+\left\{
+\begin{bmatrix}
+1\\
+0\\
+2
+\end{bmatrix},
+\begin{bmatrix}
+0\\
+1\\
+-1
+\end{bmatrix}
+\right\}.
+}
+$$
+
+---
+
+# Example
+
+Consider
+
+$$
+A=
+\begin{bmatrix}
+1&2&1\\
+2&4&2
+\end{bmatrix}.
+$$
+
+Its RREF is
+
+$$
+\operatorname{rref}(A)=
+\begin{bmatrix}
+1&2&1\\
+0&0&0
+\end{bmatrix}.
+$$
+
+The system
+
+$$
+x_1+2x_2+x_3=0
+$$
+
+has two free variables.
+
+Let
+
+$$
+x_2=s,
+\qquad
+x_3=t.
+$$
+
+Then
+
+$$
+x_1=-2s-t.
+$$
+
+Therefore,
+
+$$
+\mathbf{x}
+=
+\begin{bmatrix}
+-2s-t\\
+s\\
+t
+\end{bmatrix}
+=
+s
+\begin{bmatrix}
+-2\\
+1\\
+0
+\end{bmatrix}
++
+t
+\begin{bmatrix}
+-1\\
+0\\
+1
+\end{bmatrix}.
+$$
+
+Hence,
+
+$$
+\boxed{
+\mathcal{N}(A)
+=
+\operatorname{span}
+\left\{
+\begin{bmatrix}
+-2\\
+1\\
+0
+\end{bmatrix},
+\begin{bmatrix}
+-1\\
+0\\
+1
+\end{bmatrix}
+\right\}.
+}
+$$
+
+---
+
+# Summary
+
+| Property | Result |
+|----------|--------|
+| Definition | $\mathcal{N}(A)=\{\mathbf{x}\mid A\mathbf{x}=0\}$ |
+| Lives in | $\mathbb{R}^n$ |
+| Dimension | $n-r$ |
+| Name of Dimension | Nullity |
+| Basis | Obtained from the parametric solution of $A\mathbf{x}=0$ |
+| Type | Subspace of $\mathbb{R}^n$ |
+
+---
+
+## Relationship with Rank
+
+The null space satisfies the **Rank–Nullity Theorem**.
+
+$$
+\boxed{
+\operatorname{rank}(A)
++
+\operatorname{nullity}(A)
+=
+n.
+}
+$$
+
+where $n$ is the number of columns of $A$.
+
+---
+
+!!! tip "Memory Trick"
+
+The **Null Space** answers the question:
+
+> **"Which vectors become zero after multiplying by \(A\)?"**
+
+Remember:
+
+- **Column Space** → Outputs of \(A\)
+- **Row Space** → Independent equations
+- **Null Space** → Inputs that produce zero
+- **Left Null Space** → Outputs orthogonal to the column space
 
 The null space of a matrix, also known as the kernel, is an important concept in linear algebra. It is a subspace of the vector space from which the matrix's columns are taken and represents the set of vectors that, when multiplied by the matrix, result in the zero vector. In other words, it contains all the solutions to the homogeneous equation $Ax = 0$, where A is the matrix.
 
@@ -482,13 +2056,6 @@ Mathematically, if you have an m x n matrix A, the null space of A is denoted as
 
 $Null(A) = \{x | Ax = 0\}$
 
-!Untitled
-
-!Untitled
-
-!Untitled
-
-!Untitled
 
 Key points about the null space:
 
@@ -613,49 +2180,77 @@ $$
 
 # Linear Transformation
 
-$\textbf{Definition: Linear Transformation} \\[5pt]\text{Let } V \text{ and } W \text{ be vector spaces over the same field } \mathbb{F}. \text{ A mapping } T: V \to W \\[3pt]\text{is called a \textit{linear transformation} if it satisfies the following two conditions for all } \mathbf{u}, \mathbf{v} \in V \text{ and } c \in \mathbb{F}: \\[10pt]\begin{aligned}&\textbf{Core Conditions:} \\&\quad \text{1. Additivity:} && T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v}) \\&\quad \text{2. Homogeneity:} && T(c\mathbf{u}) = cT(\mathbf{u})\end{aligned} \\[10pt]\text{Alternative Single-Step Test:} \quad T(a\mathbf{u} + b\mathbf{v}) = aT(\mathbf{u}) + bT(\mathbf{v}) \quad \forall \, \mathbf{u}, \mathbf{v} \in V, \, \forall \, a, b \in \mathbb{F} \\[12pt]\begin{aligned}&\textbf{Fundamental Properties:} \\&\quad \text{• Zero Vector Mapping:} && T(\mathbf{0}_V) = \mathbf{0}_W \\&\quad \text{• Additive Inverse:} && T(-\mathbf{u}) = -T(\mathbf{u}) \\&\quad \text{• Matrix Representation:} && T(\mathbf{x}) = A\mathbf{x} \quad (\text{where } A \text{ is the standard matrix of the transformation})\end{aligned}$
+# Linear Transformation Cheat Sheet
+
+**Definition:** Let $V$ and $W$ be vector spaces over the same field $\mathbb{F}$. A mapping $T: V \to W$ is called a *linear transformation* if it satisfies the following two conditions for all $\mathbf{u}, \mathbf{v} \in V$ and $c \in \mathbb{F}$:
+
+### 1. Core Conditions
+* **Additivity:** 
+  $$T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v})$$
+* **Homogeneity:** 
+  $$T(c\mathbf{u}) = cT(\mathbf{u})$$
+
+### 2. Alternative Single-Step Test
+You can merge both conditions into a single statement to check for linearity in one step:
+$$T(a\mathbf{u} + b\mathbf{v}) = aT(\mathbf{u}) + bT(\mathbf{v}) \quad \forall \, \mathbf{u}, \mathbf{v} \in V, \;\; \forall \, a, b \in \mathbb{F}$$
+
+### 3. Fundamental Properties
+Every linear transformation automatically guarantees these algebraic behaviors:
+
+* **Zero Vector Mapping:** 
+
+  $$T(\mathbf{0}_V) = \mathbf{0}_W$$
+
+* **Additive Inverse:** 
+
+  $$T(-\mathbf{u}) = -T(\mathbf{u})$$
+
+* **Matrix Representation:** 
+
+  $$T(\mathbf{x}) = A\mathbf{x}$$
+
+  *(where $A$ is the standard matrix of the transformation)*
+
 
 A functions between vector spaces. A function that transform vector from one vector space to another vector space. and preserve the structure of that spaces. 
 
 **Definasion**: Let V and W be two vector spaces over the same field. A functor $T : V \rightarrow W$ is called a linear map or transformation that satisfies the properties -
 
-$$
-T(v_1 + v_2) = T(v_1)+T(v_2)\\
-T(cv)=cT(v)\\
-T(\underbrace{0}_{zero \ of \ v })=\underbrace{0}_{zero  \ of \ w}
-$$
+### Properties of a Linear Transformation
 
-!Untitled
+Let $T: V \to W$ be a linear transformation from vector space $V$ to vector space $W$:
+
+1. **Additivity (Preservation of Addition):**
+
+   $$T(v_1 + v_2) = T(v_1) + T(v_2) \quad \forall \, v_1, v_2 \in V$$
+
+2. **Homogeneity (Preservation of Scalar Multiplication):**
+
+   $$T(cv) = cT(v) \quad \forall \, v \in V, \; c \in \mathbb{F}$$
+
+3. **Zero Vector Mapping Property:**
+
+   $$T(\underbrace{\mathbf{0}_V}_{\text{Zero of } V}) = \underbrace{\mathbf{0}_W}_{\text{Zero of } W}$$
+
+
+
 
 Matrix transformation $T: \mathbb R^n \rightarrow \mathbb R^m$ defined by matrix $A_{m \times n}$ . Transformation is encoded in the matrix $A$. (we take one vector from the domain ‘V’, and multiply it with A . we will get the result vector in the codomain ‘W’)
 
 $\boxed {\huge T(v)=Av}$
 
 Ex: 
+### Example 1: $T: \mathbb{R}^2 \to \mathbb{R}^2$
+$$\begin{aligned}
+T(x,y) &= (9x+5y, \; 7x-10y) \quad \text{(Transformation Definition)} \\
+&= \begin{bmatrix} 9 & 5 \\ 7 & -10 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}
+\end{aligned}$$
 
-$T: \mathbb R^2 \rightarrow \mathbb R^2\\
-\begin{array}{rl}
-T(x,y)=&(9x+5y,7x-10y) \leftarrow (transformation \ defination)\\
-= &
-\begin{bmatrix}
-9 & 5\\
-7 & -10
-\end{bmatrix} \ \begin{bmatrix}
-x\\
-y
-\end{bmatrix}\end{array}\\$ 
-$T: \mathbb R^2 \rightarrow \mathbb R^3 \implies (x,y) \rightarrow (x,y,z) \\ 
-\begin{array}{rl}
-T(x,y)=&(x+3y,x-2y,2x+5y) \leftarrow (transformation \ defination)\\
-= &
-\begin{bmatrix}
-1 & 3\\
-1 & -2 \\
-2 & 5
-\end{bmatrix} \ \begin{bmatrix}
-x\\
-y \\ z
-\end{bmatrix}\end{array}\\$ 
+### Example 2: $T: \mathbb{R}^2 \to \mathbb{R}^3$
+$$\begin{aligned}
+T(x,y) &= (x+3y, \; x-2y, \; 2x+5y) \quad \text{(Transformation Definition)} \\
+&= \begin{bmatrix} 1 & 3 \\ 1 & -2 \\ 2 & 5 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}
+\end{aligned}$$
 
 **Remark** : $T(x,y) = (x,0)$ is a linear map but $T(x,y) = (x,1)$ is not a linear map . so there can not be a scaler rather then $zero$ or $x^2$ or $xy$ or $y^2$ . it should be linear combination of x and y. 
 
@@ -748,13 +2343,96 @@ dim(V)=dim(W)$
 !Untitled
 
 # Ordered Basis and Standard Bases
+# Ordered Basis & Coordinate Vectors Cheat Sheet
 
-$\textbf{Definition: Ordered Basis and Standard Bases} \\[5pt]\text{An \textit{ordered basis} for a finite-dimensional vector space } V \text{ is a basis where the vectors} \\[3pt]\text{are kept in a specific, fixed sequence: } \mathcal{B} = (\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n). \\[10pt]\begin{aligned}&\textbf{The Standard Ordered Bases } (\mathcal{E}): \\&\quad \text{• For } \mathbb{R}^n: && \mathcal{E} = (\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n) \\&\quad\quad && \text{where } \mathbf{e}_1 = \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}, \, \mathbf{e}_2 = \begin{bmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{bmatrix}, \, \dots, \, \mathbf{e}_n = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix} \\[10pt]&\quad \text{• For } \mathcal{P}_n(x): && \mathcal{E} = (1, x, x^2, \dots, x^n) \quad (\text{Polynomials of degree } \le n) \\[6pt]&\quad \text{• For } M_{2 \times 2}(\mathbb{R}): && \mathcal{E} = \left( \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \, \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}, \, \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}, \, \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} \right)\end{aligned} \\[12pt]\textbf{Coordinate Vector Notation:} \quad \text{If } \mathbf{x} = c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \dots + c_n\mathbf{v}_n \text{, the unique coordinate column is:} \\\quad [\mathbf{x}]_\mathcal{B} = \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix} \in \mathbb{R}^n$
+**Definition:** An *ordered basis* for a finite-dimensional vector space $V$ is a basis where the vectors are kept in a specific, fixed sequence: 
+$$\mathcal{B} = (\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n)$$
+
+### 1. Standard Ordered Bases ($\mathcal{E}$)
+
+* **For Vector Space $\mathbb{R}^n$:**
+  $$\mathcal{E} = (\mathbf{e}_1, \mathbf{e}_2, \dots, \mathbf{e}_n)$$
+  $$\text{where } \mathbf{e}_1 = \begin{bmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{bmatrix}, \;\; \mathbf{e}_2 = \begin{bmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{bmatrix}, \;\; \dots, \;\; \mathbf{e}_n = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{bmatrix}$$
+
+* **For Polynomial Space $\mathcal{P}_n(x)$ (Degree $\le n$):**
+  $$\mathcal{E} = (1, x, x^2, \dots, x^n)$$
+
+* **For Matrix Space $M_{2 \times 2}(\mathbb{R})$:**
+  $$\mathcal{E} = \left( \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \;\; \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}, \;\; \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}, \;\; \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} \right)$$
+
+---
+
+### 2. Coordinate Vector Notation
+
+If a vector $\mathbf{x}$ is expressed as a unique linear combination of your ordered basis vectors:
+$$\mathbf{x} = c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \dots + c_n\mathbf{v}_n$$
+
+Then the unique coordinate column vector relative to $\mathcal{B}$ is written as:
+$$[\mathbf{x}]_\mathcal{B} = \begin{bmatrix} c_1 \\ c_2 \\ \vdots \\ c_n \end{bmatrix} \in \mathbb{R}^n$$
+
+
 
 # Matrix Equivalence vs. Matrix Similarity
 
-$\textbf{Matrix Equivalence vs. Matrix Similarity} \\[5pt]\text{Let } A \text{ and } B \text{ be matrices over a field } \mathbb{F}. \text{ These two relations represent different levels} \\[3pt]\text{of structural transformation in linear algebra.} \\[12pt]\begin{aligned}&\textbf{1. Equivalent Matrices } (A \sim B) \\&\quad \text{• Context:} && A \text{ and } B \text{ are } m \times n \text{ matrices (not necessarily square).} \\&\quad \text{• Definition:} && B = PAQ \quad \text{where } P \text{ and } Q \text{ are invertible matrices } (P \in M_m, Q \in M_n). \\&\quad \text{• Meaning:} && A \text{ and } B \text{ represent the \textit{same} linear transformation } T: V \to W \\&\quad\quad && \text{with respect to changing bases in \textit{both} the domain and codomain.} \\&\quad \text{• Invariant:} && \text{Equivalent matrices share the exact same } \textbf{Rank}. \\[12pt]&\textbf{2. Similar Matrices } (A \approx B) \\&\quad \text{• Context:} && A \text{ and } B \text{ must be square matrices } (n \times n). \\&\quad \text{• Definition:} && B = P^{-1}AP \quad \text{where } P \text{ is an invertible } n \times n \text{ matrix.} \\&\quad \text{• Meaning:} && A \text{ and } B \text{ represent the \textit{same} linear operator } T: V \to V \\&\quad\quad && \text{with respect to a change of a single, uniform basis } \mathcal{B}. \\&\quad \text{• Invariants:} && \text{Similar matrices share: Rank, Determinant, Trace, Eigenvalues,} \\&\quad\quad && \text{Characteristic Polynomial, and Invertibility.}\end{aligned}$
+# Matrix Equivalence vs. Matrix Similarity
+
+Let $A$ and $B$ be matrices over a field $\mathbb{F}$. These two relations represent different levels of structural transformation in linear algebra.
+
+---
+
+### 1. Equivalent Matrices ($A \sim B$)
+
+* **Context:** $A$ and $B$ are $m \times n$ rectangular matrices (not necessarily square).
+* **Algebraic Definition:** 
+$$B = PAQ \quad \text{where } P \in M_m(\mathbb{F}) \text{ and } Q \in M_n(\mathbb{F}) \text{ are invertible matrices}$$
+
+* **Geometric Meaning:** $A$ and $B$ represent the *same* linear transformation $T: V \to W$ under an independent change of bases in **both** the domain and codomain.
+* **Core Invariant:** Equivalent matrices share the exact same **Rank**.
+
+---
+
+### 2. Similar Matrices ($A \approx B$)
+
+* **Context:** $A$ and $B$ must be square matrices ($n \times n$).
+* **Algebraic Definition:** 
+$$B = P^{-1}AP \quad \text{where } P \in M_n(\mathbb{F}) \text{ is an invertible change-of-basis matrix}$$
+
+* **Geometric Meaning:** $A$ and $B$ represent the *same* linear operator $T: V \to V$ with respect to a change of a single, uniform basis $\mathcal{B}$.
+
+* **Core Invariants:** Similar matrices share a massive set of spectral properties:
+  $$\text{Rank}, \;\; \det(A), \;\; \text{Trace}(A), \;\; \text{Eigenvalues}, \;\; \text{Characteristic Polynomial}, \;\; \text{and Invertibility}$$
+
 
 # Affine Subspace
+# Affine Subspace (Flat) Cheat Sheet
 
-$\textbf{Definition: Affine Subspace (Flat)} \\[5pt]\text{Let } V \text{ be a vector space over a field } \mathbb{F}, \text{ and let } W \subseteq V \text{ be a valid vector subspace.} \\[3pt]\text{An \textit{affine subspace} } A \text{ of } V \text{ is a translated copy of } W \text{ shifted by a fixed displacement vector } \mathbf{x}_0 \in V. \\[12pt]\begin{aligned}&\textbf{Mathematical Formulations:} \\&\quad \text{• Set Notation:} && A = \mathbf{x}_0 + W = \{ \mathbf{x}_0 + \mathbf{w} \mid \mathbf{w} \in W \} \\&\quad \text{• Dimension:} && \dim(A) = \dim(W) \\&\quad \text{• Core Geometry:} && \text{An affine subspace does \textit{not} have to contain the origin } \mathbf{0} \\&\quad\quad && (\text{unless } \mathbf{x}_0 \in W \text{, in which case } A = W).\end{aligned} \\[12pt]\textbf{Alternative Characterization (Affine Combinations):} \\[5pt]\text{A subset } A \subseteq V \text{ is an affine subspace if and only if for any vectors } \mathbf{u}, \mathbf{v} \in A \text{ and any scalar } t \in \mathbb{F}: \\[5pt]\quad (1 - t)\mathbf{u} + t\mathbf{v} \in A \quad (\text{Closure under lines passing through any two points}) \\[12pt]\textbf{Geometric Examples in } \mathbb{R}^3: \\\quad \text{• Dimension 0:} \quad \text{A single point } \{\mathbf{x}_0\}. \\\quad \text{• Dimension 1:} \quad \text{A line that does not pass through the origin: } \mathbf{x} = \mathbf{x}_0 + t\mathbf{v}. \\\quad \text{• Dimension 2:} \quad \text{A plane that does not pass through the origin: } \mathbf{x} = \mathbf{x}_0 + s\mathbf{v}_1 + t\mathbf{v}_2.$
+**Definition:** Let $V$ be a vector space over a field $\mathbb{F}$, and let $W \subseteq V$ be a valid vector subspace. An *affine subspace* $A$ of $V$ is a translated copy of $W$ shifted by a fixed displacement vector $\mathbf{x}_0 \in V$.
+
+---
+
+### 1. Mathematical Formulations
+
+* **Set Notation:** 
+  $$A = \mathbf{x}_0 + W = \{ \mathbf{x}_0 + \mathbf{w} \mid \mathbf{w} \in W \}$$
+* **Dimension:** 
+  $$\dim(A) = \dim(W)$$
+* **Core Geometry:** An affine subspace does *not* have to contain the origin $\mathbf{0}$ *(unless $\mathbf{x}_0 \in W$, in which case $A = W$)*.
+
+---
+
+### 2. Alternative Characterization (Affine Combinations)
+
+A subset $A \subseteq V$ is an affine subspace if and only if for any vectors $\mathbf{u}, \mathbf{v} \in A$ and any scalar $t \in \mathbb{F}$:
+$$(1 - t)\mathbf{u} + t\mathbf{v} \in A$$
+*(This implies geometric closure under lines passing through any two points in the subset).*
+
+---
+
+### 3. Geometric Examples in $\mathbb{R}^3$
+
+* **Dimension 0 (Point):** A single translated coordinate point: 
+  $$\{\mathbf{x}_0\}$$
+* **Dimension 1 (Line):** A line that does not necessarily pass through the origin: 
+  $$\mathbf{x} = \mathbf{x}_0 + t\mathbf{v}$$
+* **Dimension 2 (Plane):** A flat plane that does not necessarily pass through the origin: 
+  $$\mathbf{x} = \mathbf{x}_0 + s\mathbf{v}_1 + t\mathbf{v}_2$$
