@@ -5,31 +5,28 @@ Example: Tossing a fair coin.
 2. **Outcome**: Result of the experiment.
 Example: head is an outcome on tossing a fair coin.
 3. **Sample space**: A sample space is a set that contains all outcomes of an experiment.
-• Sample space is a set, typically denoted S of an experiment.
-• example: Toss a coin: $S = \{ heads, tails \}$
+    - Sample space is a set, typically denoted S of an experiment.
+    - example: Toss a coin: $S = \{ heads, tails \}$
 4. **Event**: An event is a subset of the sample space.
-• Toss a coin: S = { heads, tails }
-– Events: empty set, {heads}, {tails}, { heads, tails }
-– 4 events
-• An event is said to have “occurred” if the actual outcome of the experiment belongs to the event.
-• One event can be contained in another, i.e. A ⊆ B
-• Complement of an event A, denoted AC = { outcomes in S not in A } = (S \ A).
-• Since events are subsets, one can do complements, unions, intersections.
+- Toss a coin: S = { heads, tails }
+    - Events: empty set, {heads}, {tails}, { heads, tails }
+    - 4 events
+- An event is said to have “occurred” if the actual outcome of the experiment belongs to the event.
+- One event can be contained in another, i.e. A ⊆ B
+- Complement of an event A, denoted AC = { outcomes in S not in A } = (S \ A).
+- Since events are subsets, one can do complements, unions, intersections.
 5. **Disjoint events**: Two events with an empty intersection are said to be disjoint events.
-• Throw a die: even number, odd number are disjoint.
-• Multiple events: E1, E2, E3, .... are disjoint if, for any i 6 = j , Ei ∩ Ej = empty set.
+    - Throw a die: even number, odd number are disjoint.
+    - Multiple events: E1, E2, E3, .... are disjoint if, for any i 6 = j , Ei ∩ Ej = empty set.
 6. **De Morgan’s laws**: For any two events A and B,
 $(A ∪ B)C = AC ∩ BC$ and $(A ∩ B)C = AC ∪ BC$ .
-7. **Probability**: “Probability” is a unction P that assigns to each event a real number
-between 0 and 1 and satisfies the following two axioms:
+7. **Probability**: “Probability” is a unction P that assigns to each event a real number between 0 and 1 and satisfies the following two axioms:
 (i) P (S) = 1 (probability of the entire sample space equals 1).
 (ii) If E1, E2, E3, ... are disjoint events ( Could be infinitely many),
 $P (E_1 ∪ E_2 ∪ E_3 ∪ ...) = P (E_1) + P (E_2) + P (E_3) + ...$
-• Probability function Assigns a value that represents chance of occurrence of the
-event.
-• Higher value of the probability of an event means higher chance of occurring that
-event.
-• 0 means event cannot occur and 1 means event always occurs.
+    - Probability function Assigns a value that represents chance of ccurrence of the event.
+    - Higher value of the probability of an event means higher chance of occurring that event.
+    - 0 means event cannot occur and 1 means event always occurs.
 8. Probability of the empty set (denoted φ) equals 0. that is
 P (φ) = 0
 9. Let EC be the complement of Event E. Then,
@@ -49,8 +46,7 @@ P (E ∪ F ) = P (E) + P (F ) − P (E ∩ F )
 15. **Conditional probability space**: Consider a probability space (S, E, P ), where S
 represents the sample space, E represents the collection of events, and P represents
 the probability function.
-• Let B be an event in S with P (B) > 0. Now, conditional probability space given
-B is defined as
+• Let B be an event in S with P (B) > 0. Now, conditional probability space given B is defined as
 For any event A in the original probability space (P, S, E), the conditional prob-
 ability of A given B is P (A ∩ B)
 P (B) .
@@ -173,3 +169,66 @@ integers
 | **Normal**$(\mu, \sigma^2)$ | $\frac{1}{\sigma\sqrt{2\pi}} \exp\left( \frac{-(x-\mu)^2}{2\sigma^2} \right), -\infty < x < \infty$ | No closed form | $\mu$ | $\sigma^2$ |
 | **Gamma**$(\alpha, \beta)$ | $\frac{\beta^\alpha}{\Gamma(\alpha)} x^{\alpha-1} e^{-\beta x}, \text{ for } x > 0$ | No simple form | $\frac{\alpha}{\beta}$ | $\frac{\alpha}{\beta^2}$ |
 | **Beta**$(\alpha, \beta)$ | $\frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha-1} (1-x)^{\beta-1}, \text{ for } 0 < x < 1$ | No simple form | $\frac{\alpha}{\alpha+\beta}$ | $\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta+1)}$ |
+
+
+
+
+
+
+
+
+
+
+# Probability Inequalities & Limit Theorems Cheat Sheet
+
+### 1. Markov's Inequality
+Let $X$ be a discrete random variable taking non-negative values with a finite mean $\mu$. Then:
+$$P(X \ge c) \le \frac{\mu}{c}$$
+
+### 2. Chebyshev's Inequality
+Let $X$ be a discrete random variable with a finite mean $\mu$ and a finite variance $\sigma^2$. Then:
+$$P(|X - \mu| \ge k\sigma) \le \frac{1}{k^2}$$
+
+### 3. Weak Law of Large Numbers (WLLN)
+Let $X_1, X_2, \dots, X_n \sim \text{iid } X$ with $E[X] = \mu$ and $\text{Var}(X) = \sigma^2$.  
+Define the sample mean as $\overline{X} = \frac{X_1 + X_2 + \dots + X_n}{n}$. Then:
+$$P(|\overline{X} - \mu| > \delta) \le \frac{\sigma^2}{n\delta^2}$$
+
+### 4. Using CLT to Approximate Probability
+Let $X_1, X_2, \dots, X_n \sim \text{iid } X$ with $E[X] = \mu$ and $\text{Var}(X) = \sigma^2$.  
+Define the sum as $Y = X_1 + X_2 + \dots + X_n$. Then:
+$$\frac{Y - n\mu}{\sqrt{n}\sigma} \approx \text{Normal}(0, 1)$$
+
+### 5. Bias of an estimator
+$$\text{Bias}(\hat{\theta}, \theta) = E[\hat{\theta}] - \theta$$
+
+### 6. Method of moments
+Sample moments: $M_k(X_1, X_2, \dots, X_n) = \frac{1}{n}\sum_{i=1}^{n} X_i^k$
+
+**Procedure:** For one parameter $\theta$
+- Sample moment: $m_1$
+- Distribution moment: $E(X) = f(\theta)$
+- Solve for $\theta$ from $f(\theta) = m_1$ in terms of $m_1$.
+- $\hat{\theta}$: replace $m_1$ by $M_1$ in the above solution.
+
+### 7. Likelihood of i.i.d. samples
+Likelihood of a sampling $x_1, x_2, \dots, x_n$, denoted:
+$$L(x_1, \dots, x_n) = \prod_{i=1}^{n} f_X(x_i; \theta_1, \theta_2, \dots)$$
+
+### 8. Maximum likelihood (ML) estimation
+$$\theta_1^*, \theta_2^*, \dots = \arg\max_{\theta_1, \theta_2, \dots} \prod_{i=1}^{n} f_X(x_i; \theta_1, \theta_2, \dots)$$
+
+### 9. Bayesian estimation
+Let $X_1, \dots, X_n \sim \text{i.i.d. } X$, parameter $\Theta$.
+- Prior distribution of $\Theta$: $\Theta \sim f_{\Theta}(\theta)$.
+- Samples, $S$: $(X_1 = x_1, \dots, X_n = x_n)$
+- Posterior: $\Theta \mid (X_1 = x_1, \dots, X_n = x_n)$
+- Bayes' rule: $\text{Posterior} \propto \text{Prior} \times \text {Likelihood}$
+- Posterior density $\propto f_{\Theta}(\theta) \times P(X_1 = x_1, \dots, X_n = x_n \mid \Theta = \theta)$
+
+### 10. Normal samples with unknown mean and known variance
+$X_1, \dots, X_n \sim \text{i.i.d. Normal}(M, \sigma^2)$.  
+Prior $M \sim \text{Normal}(\mu_0, \sigma_0^2)$.  
+$$\text{Posterior mean: } \hat{\mu} = \overline{X}\left(\frac{n\sigma_0^2}{n\sigma_0^2 + \sigma^2}\right) + \mu_0\left(\frac{\sigma^2}{n\sigma_0^2 + \sigma^2}\right)$$
+
+

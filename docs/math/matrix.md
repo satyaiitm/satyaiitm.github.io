@@ -13,12 +13,8 @@ $$
 $$
 
 # Types of Matrix
-## The Comprehensive Matrix Taxonomy Guide
+The Comprehensive Matrix Taxonomy Guide
 
-
-
----
----
 
 ## Visual Reference: Types of Matrices 
 
@@ -70,7 +66,7 @@ $\begin{array}{ccc}\begin{array}{c} \textbf{Row Matrix} \\ \begin{bmatrix} 3 & 5
 
 
 
-# Summary Table
+### Summary Table
 
 | Matrix Type | Defining Property |
 |-------------|-------------------|
@@ -168,7 +164,7 @@ $\begin{aligned}
 \end{aligned}
 \qquad AB = \begin{bmatrix} -5 & 4 \\ 0 & 5 \\ -1 & -4 \end{bmatrix}$
 
-------------------------------
+
 ## 2. Row-by-Row Method (Top Right)
 
 $\begin{aligned}
@@ -205,7 +201,7 @@ $\begin{aligned}
 \end{aligned}
 \qquad AB = \begin{bmatrix} -5 & 4 \\ 0 & 5 \\ -1 & -4 \end{bmatrix}$
 
-------------------------------
+
 ## 3. Outer Product Expansion / Columns $\times$ Rows (Bottom)
 
 $\begin{aligned}
@@ -214,24 +210,24 @@ $\begin{aligned}
 &= \begin{bmatrix} 1 & 2 \\ 2 & 4 \\ 0 & 0 \end{bmatrix} + \begin{bmatrix} -4 & -2 \\ -2 & -1 \\ -4 & -2 \end{bmatrix} + \begin{bmatrix} -2 & 4 \\ -2 & 4 \\ -1 & 2 \end{bmatrix} + \begin{bmatrix} 0 & 0 \\ 2 & -2 \\ 4 & -4 \end{bmatrix} = \begin{bmatrix} -5 & 4 \\ 0 & 5 \\ -1 & -4 \end{bmatrix}
 \end{aligned}$
 
----
+
 **Properties of matrix addition and multiplication**
 
-• $AB \ne BA$ 
-• $(A + B) + C = A + (B + C )$ (Associativity of addition)
-• $(AB)C = A(BC )$ (Associativity of multiplication)
-• $A + B = B + A$ (Commutativity of addition)
-• $λ(A + B) = λA + λB$ for some real number λ.
-• $λ(AB) = (λA)B = A(λB)$ for some real number λ.
-• $A(B + C ) = AB + AC$
-• $(A + B)C = AC + BC$
-• $(AB)^T = B^T  A^T$
- • $I_n A = AI_n = A_{n \times m}$ 
+- $AB \ne BA$ 
+- $(A + B) + C = A + (B + C )$ (Associativity of addition)
+- $(AB)C = A(BC )$ (Associativity of multiplication)
+- $A + B = B + A$ (Commutativity of addition)
+- $λ(A + B) = λA + λB$ for some real number λ.
+- $λ(AB) = (λA)B = A(λB)$ for some real number λ.
+- $A(B + C ) = AB + AC$
+- $(A + B)C = AC + BC$
+- $(AB)^T = B^T  A^T$
+- $I_n A = AI_n = A_{n \times m}$ 
 
-• if $A = B^T$  then $AB$ is symmetric matrix
-• if $E_2E_1B = B$ then $E_2E_1 = I$
-• if A and B bothe are “lower triangular matrix ” then AB is also “lower triangular matrix” (same for upper_triangular matrix and diagonal matrix)
-• if A is lower-triangular and B is Upper-triangular matrix, then in general $AB,BA,A^TA, B^TB,AA^T,BB^T$ none of these are triangular
+- if $A = B^T$  then $AB$ is symmetric matrix
+- if $E_2E_1B = B$ then $E_2E_1 = I$
+- if A and B bothe are “lower triangular matrix ” then AB is also “lower triangular matrix” (same for upper_triangular matrix and diagonal matrix)
+- if A is lower-triangular and B is Upper-triangular matrix, then in general $AB,BA,A^TA, B^TB,AA^T,BB^T$ none of these are triangular
 
 **some fun with matrix multiplication**
 
@@ -243,7 +239,7 @@ $P = \begin {bmatrix} 0&1&0 \\ 1&0&0 \\ 0&0&1 \end{bmatrix}$, $A = \begin {bmatr
 
 $AP = \begin {bmatrix} 2&1&3 \\ 5&4&6 \\ 8&7&9 \end{bmatrix}$ (this is post-multiplication, it changes the position of the columns)
 
-## Trace   ($tr(A)$)
+# Trace   ($tr(A)$)
 
 $\boxed{tr(A) = \sum _i a_{ii}}$  (sum of all diagonal elements)
 
@@ -257,7 +253,8 @@ $A = \begin {bmatrix} a&b&c \\ d&e&f \\ g&h&i \end{bmatrix}$  then     $tr(A) = 
 - $tr(AB)=tr(BA)$
 - $tr(ABC)=tr(BAC)=tr(CAB)$
 
-## Transpose Matrix ($A^T$)
+
+# Transpose Matrix ($A^T$)
 
 $\boxed{A_{ij} \to A_{ji}}$
 
@@ -271,13 +268,14 @@ $A = \begin {bmatrix} 1&2&3 \\ 4&5&6 \\ 7&8&9 \end{bmatrix}$ then $A^T = \begin 
 - $\left( AB\right) ^{T}=B^{T}A^{T}$
 - $det(A^T) = det(A)$
 
-## Determinant
+
+# Determinant
 
  Notation ======  $det(A)$ or $|A|$
 It is used in :
-• solving a system of linear equations,
-• finding the inverse of a matrix,
-• calculus and more.
+- solving a system of linear equations,
+- finding the inverse of a matrix,
+- calculus and more.
 
 **First order Determinant :**
 If A = [a]
@@ -412,21 +410,14 @@ $det(A) = \sum^n_{i=1} (-1)^{i+j} a_{ij}M_{ij} \qquad \text{for a fixed j} \\= (
 
 **Properties of determinant of matrices.**
 
-$det(I)=1$ (of any order n) . 
-
-$det(A^{2}) = [{det(A)}]^2$
-
-$det(AA^{−1}) = det(I)$, i.e., $det(A).det(A^{−1}) = 1$ 
-
-$det(PAP^{-1})=det(A)$
-
-$det(A^{−1}) = \frac {1}{det(A)}$ .
-
-$det(A^T ) = det(A)$, where $A^T$ denotes the transpose of matrix A.
-
-$det(AB) = det(A)det(B)$, where both A and B are n × n matrices 
-
-$\det \left( cA\right) _{n\times n}=c^{n}\left| A\right|$
+- $det(I)=1$ (of any order n)
+- $det(A^{2}) = [{det(A)}]^2$
+- $det(AA^{−1}) = det(I)$, i.e., $det(A).det(A^{−1}) = 1$ 
+- $det(PAP^{-1})=det(A)$
+- $det(A^{−1}) = \frac {1}{det(A)}$ .
+- $det(A^T ) = det(A)$, where $A^T$ denotes the transpose of matrix A.
+- $det(AB) = det(A)det(B)$, where both A and B are n × n matrices 
+- $det \left( cA\right) _{n\times n}=c^{n}\left| A\right|$
 
 - **Switching two rows or columns**  = changes the sign of the determinant.
     
@@ -480,7 +471,7 @@ $$
     $\begin{vmatrix} 1&0&0\\0&1&0\\0&0&1  \end{vmatrix}=\begin{vmatrix} 1&0\\0&1 \end{vmatrix}=1$
     
 
-## Adjoint of a squire matrix
+# Adjoint of a squire matrix
 
 **Adjoint or Adjugate or Adjunct**
 
@@ -515,7 +506,7 @@ $Adjoint \ matrix = \large C^T \\(transpose \ of \ cofactor \ matrix)$
 - $Adj(Adj(A))=|A|^{n-2} . A$
 - $Adj(k.A)=k^{n-1}.Adj(A)$
 
-## Inverse of a matrix
+# Inverse of a matrix
 
 $$
 A^{-1} = \frac{1}{det(A)} \ adj(A)
@@ -541,7 +532,7 @@ a & 0 & 0\\
 0 & 0 & 1/c \end {smallmatrix}$
 - $(triangular)^{-1} = triangular \text{(of same pattern, and diagonal elements will be reciprocal)}$
 
-## (Reduced ) Row echelon form
+# (Reduced ) Row echelon form
 
 Axiams
 

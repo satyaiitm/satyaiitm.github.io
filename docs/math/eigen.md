@@ -2,7 +2,7 @@
 
 Here’s a comprehensive list of the key properties of eigenvalues and eigenvectors:
 
-### Properties of Eigenvalues
+## Properties of Eigenvalues
 
 1. **Sum and Product of Eigenvalues**:
     - The sum of the eigenvalues of a matrix $A$  is equal to the trace of $A$ (the sum of the diagonal elements).
