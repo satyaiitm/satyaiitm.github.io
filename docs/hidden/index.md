@@ -14,6 +14,8 @@
 - [PCA](machine-learning/PCA.md)
 
 ## Deep Learning
+- [loss function](deep-learning/loss-function.md)
+- [optimization algo](deep-learning/Optimization_algorithm.md)
 
 ## Formula
 
