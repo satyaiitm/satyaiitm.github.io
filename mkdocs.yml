@@ -20,7 +20,7 @@ theme:
         name: Light mode
 
   features:
-    - navigation.tabs
+    # - navigation.tabs
     - navigation.sections
     - navigation.expand
     - navigation.top
@@ -28,6 +28,18 @@ theme:
     - search.share
     - content.code.copy
     - toc.follow
+
+nav:
+  - Home: index.md
+  - Notes: notes.md
+  - Deep Learning:
+      - Overview: deep-learning/index.md
+  - Math:
+      - Overview: math/index.md
+
+
+
+
 
 markdown_extensions:
   - admonition
