@@ -1,94 +1,9 @@
-# 📘 Choosing an Optimization Algorithm in Deep Learning
+# Optimization Algorithm
 
-An **optimization algorithm** (or **optimizer**) decides **how your model’s weights are updated** after each training step.
 
-Different optimizers handle learning in **different ways** — some are fast, some are stable, and some are better for large datasets.
 
----
-
-## 🔹 Step 1: Understand What You’re Optimizing
-
-All optimizers try to **minimize a loss function** (for example, classification error or MSE).
-
-They change the weights ( W ) in the opposite direction of the gradient:
-
-$W_{\text{new}} = W_{\text{old}} - \text{learning rate} \times \text{gradient}$
-
-The **difference** is in how they use the gradient.
-
----
-
-## 🔹 Step 2: Know the Main Optimizers and When to Use Them
-
-| Optimizer | How It Works | When to Use | Notes |
-| --- | --- | --- | --- |
-| **SGD (Stochastic Gradient Descent)** | Uses raw gradients directly | Small datasets, simple models | Good baseline; needs careful learning rate tuning |
-| **SGD + Momentum** | Adds memory of past gradients for smoother updates | Deep networks, image tasks | Faster convergence, reduces oscillation |
-| **RMSprop** | Adapts learning rate for each parameter | Recurrent Neural Networks (RNNs), noisy gradients | Handles non-stationary data well |
-| **Adam** | Combines Momentum + RMSprop | Most general tasks (CNNs, Transformers) | Default optimizer for many deep learning problems |
-| **AdamW** | Adam with correct weight decay | Large models (Transformers, BERT, GPT) | Handles regularization better |
-| **Adagrad** | Adapts learning rate to each parameter | Sparse data (like NLP word embeddings) | May slow down training over time |
-| **Adadelta** | Improvement over Adagrad | When learning rate is hard to choose | Less sensitive to initial learning rate |
-| **LBFGS** | Second-order approximation (uses curvature) | Small datasets, classical ML-like problems | High memory cost, not for large neural nets |
-
----
-
-## 🔹 Step 3: Consider These Factors Before Choosing
-
-1. **Dataset Size**
-    - Small datasets → SGD or Adam both work.
-    - Large datasets → Adam or AdamW is more stable.
-2. **Model Type**
-    - CNNs → Adam or SGD with momentum.
-    - RNNs → RMSprop or Adam.
-    - Transformers → AdamW.
-3. **Learning Rate Sensitivity**
-    - If your model is sensitive → Adam (auto adjusts learning rate).
-    - If you want full control → SGD (you tune manually).
-4. **Regularization Need**
-    - For models that overfit easily → use **AdamW** or add **weight decay**.
-5. **Computation Cost**
-    - Adam and RMSprop use more memory.
-    - SGD is cheaper but may converge slowly.
-
----
-
-## 🔹 Step 4: Common Practice (Rule of Thumb)
-
-| Situation | Recommended Optimizer |
-| --- | --- |
-| General deep learning (default choice) | **Adam** |
-| Large-scale models (Transformers, LLMs) | **AdamW** |
-| Simple image networks (CNNs) | **SGD with Momentum** |
-| RNNs, noisy data | **RMSprop** |
-| Sparse features (like text embeddings) | **Adagrad** |
-
----
-
-## 🔹 Step 5: Fine-Tuning Tips
-
-- Always **start with Adam** → simple and fast.
-- Once model works, try **SGD + Momentum** for possible better generalization.
-- Use **learning rate scheduling** (e.g., `StepLR`, `ReduceLROnPlateau`) to improve stability.
-- Watch training curves:
-    - **Loss decreases too slowly** → learning rate too small.
-    - **Loss jumps or NaN** → learning rate too high.
-
----
-
-### ✅ Summary
-
-| Key Idea | Explanation |
-| --- | --- |
-| Optimizers control how weights update | Different strategies for faster and stable convergence |
-| Adam is a strong default | Works for most tasks |
-| SGD with momentum often generalizes better | Common in vision models |
-| AdamW is preferred for large modern architectures | Fixes weight decay issue in Adam |
-| Choice depends on data, model, and training behavior | No one-size-fits-all |
-
----
-
-# **Gradient Descent: The Foundation**
+# 🔵 Gradient Descent
+### The Foundation
 
 **Gradient descent is an iterative optimization algorithm that uses the gradient (first-order derivative) of the loss function to find local minima.** The algorithm is based on a simple intuition: to minimize a function, move in the direction of steepest descent.
 
@@ -96,7 +11,7 @@ The **difference** is in how they use the gradient.
 
 Let’s start from **vanilla (basic) gradient descent**:
 
-$\theta_{t+1} = \theta_t - \eta \nabla_\theta L(\theta_t)$
+$$\theta_{t+1} = \theta_t - \eta \nabla_\theta L(\theta_t)$$
 
 Where:
 
@@ -136,218 +51,69 @@ The gradient **$∇_θL(θₜ)$** points in the direction of **steepest ascent**
 
 **The primary distinction between gradient descent variants lies in how many training samples are used to compute the gradient at each iteration.** This fundamental choice creates a trade-off between computational efficiency and gradient accuracy.
 
-# **Momentum-based Gradient Descent**
+---
+
+```mermaid
+flowchart TD
+    A[Gradient Descent]
+
+    A --> B{How many samples are used<br/>to compute one gradient?}
+
+    B -->|Uses Entire Training Dataset <br/> 1 Update per Epoch <br/> Stable Gradient <br/> High Memory Usage <br/> Slow for Large Datasets | C[Batch Gradient Descent]
+
+    B -->|Uses One Sample at a Time <br/> One Update per Sample <br/> Fast but Noisy <br/> Low Memory Usage <br/> May Oscillate Around Minimum| D[Stochastic Gradient Descent]
+
+    B -->|Uses Small Batch <br/> e.g., 32, 64, 128 <br/> Multiple Updates per Epoch <br/> Balanced Speed & Stability <br/> Most Common in Deep Learning| E[Mini-Batch Gradient Descent]
+
+    C --> C1[Accurate Gradient]
+    C --> C2[Slow Updates]
+
+    D --> D1[Very Fast Updates]
+    D --> D2[High Variance]
+
+    E --> E1[Fast]
+    E --> E2[Stable]
+    E --> E3[Preferred in Practice]
+```
 
 ---
 
-## 💡 Intuitive Idea
-
-Imagine rolling a **ball down a hill** (the loss surface).
-
-- **Plain Gradient Descent**: The ball moves slowly and zigzags if the hill is steep and curved.
-- **Momentum Gradient Descent**: The ball builds **speed** in the downhill direction — it gains *momentum* and moves smoother and faster toward the bottom.
-
----
-
----
-
-## ⚙️ With Momentum
-
-We add a **velocity term** ($v_t$) to keep track of *past gradients*:
-
-$\theta_{t+1} = \theta_t - \eta v_t \\ 
-v_t = \beta v_{t-1} + (1 - \beta)\nabla_\theta L(\theta_t)$
-
-Where:
-
-- $(v_t)$ → running average of past gradients (velocity)
-- $(\beta)$ → momentum coefficient (usually between 0.8 and 0.99), (controls how much past velocity we keep)
-- $(\eta)$ → learning rate
-
----
-
-### 🧠 Intuition Behind Each Term
-
-| Symbol | Meaning | Intuition |
-| --- | --- | --- |
-| $(v_t)$ | Velocity | Like the speed and direction of the ball |
-| $(\beta v_{t-1})$ | Momentum from the past | Keeps moving in same direction if gradients point the same way |
-| $((1-\beta)\nabla L)$ | Current gradient | Corrects direction if the slope changes |
-| $(\eta v_t)$ | Step size | How far to move in the parameter space |
-
----
-
-### 🔍 Why It Helps
-
-1. **Smooths updates**
-    - Without momentum, gradients fluctuate — the path zigzags.
-    - With momentum, updates are averaged, so it moves smoothly.
-2. **Speeds up convergence**
-    - When gradients point in the same direction, momentum amplifies the movement.
-    - The ball accelerates down consistent slopes.
-3. **Reduces oscillation**
-    - Especially helpful when loss surface is steep in one dimension and flat in another.
-
----
-
-# 🧭 Visual Analogy
-
-Imagine pushing a heavy ball down a bumpy hill:
-
-- If you push gently (small learning rate), it’s slow.
-- If you push too hard (high learning rate), it overshoots.
-- But if the ball has **momentum**, it rolls smoothly and naturally across small bumps.
-
----
-
-### 🔢 Typical Values
-
-- Momentum ($\beta$): **0.9** (most common)
-- Learning rate ($\eta$): tuned per problem, e.g., 0.01 or 0.001
-
----
-
-# ✅ Summary Flashcard (RemNote Style)
-
-- **Momentum-based Gradient Descent** ↔ Uses past gradient information to smooth and accelerate learning
-- **Velocity update** ↔ $(v_t = \beta v_{t-1} + (1 - \beta)\nabla L(\theta_t))$
-- **Parameter update** ↔ $(\theta_{t+1} = \theta_t - \eta v_t)$
-- **Intuition** ↔ Like rolling a ball down a hill — builds speed in the right direction, reduces oscillation
-- **Common setting** ↔ $(\beta = 0.9), (\eta = 0.01)$
-
----
-
-**Physical Analogy:**
-Imagine a ball rolling down a hill. Momentum helps the ball:
-
-1. **Accelerate** in directions of consistent downward slope
-2. **Dampen oscillations** in directions with conflicting gradients
-3. **Escape shallow local minima** by maintaining velocity
-
-**Key Advantages:**
-
-- Faster convergence in relevant directions
-- Reduced oscillations in high-curvature regions
-- Better navigation through plateaus and ravines
-- Helps escape saddle points
-
-**Typical Hyperparameter Settings:**
-
-- $\beta$ = 0.9 (standard)
-- $\beta$ = 0.99 (for very large models or smooth optimization landscapes)
-
-## 🔍 What β Controls
-
-β decides **how much “memory” of the past gradients** you keep.
-
-It’s like the **friction** or **inertia** of a rolling ball.
-
----
-
-### 🧩 Case 1: **β = 0**
-
-- Formula becomes: ($v_t = \nabla L(\theta_t)$)
-- So: **no momentum at all** — plain gradient descent.
-- Updates depend only on the *current gradient*.
-- Behavior → slow, noisy, lots of zig-zag motion.
-
-👉 **Good for:** very simple or convex problems.
-
-👉 **Bad for:** deep or complex landscapes.
-
----
-
-### 🧩 Case 2: **β = 0.5**
-
-- Keeps *half* of the previous velocity.
-- Moderate smoothing of gradients.
-- Converges faster than pure SGD but still adjusts fairly quickly to gradient changes.
-
-👉 **Good for:** when loss surface changes direction often.
-
----
-
-### 🧩 Case 3: **β = 0.9 (default in PyTorch SGD)**
-
-- Keeps 90 % of the previous direction → strong momentum.
-- Smooths updates and accelerates in consistent directions.
-- Typical “sweet spot” — balances **speed** and **stability**.
-
-👉 **Good for:** most deep learning models (CNNs, RNNs, Transformers).
-
----
-
-### 🧩 Case 4: **β = 0.99**
-
-- Almost full memory — gradients from many past steps dominate.
-- Extremely smooth, but reacts *slowly* to new gradient directions.
-- May **overshoot** or take too long to adapt if the landscape changes.
-
-👉 **Good for:** very smooth loss surfaces.
-
-👉 **Risk:** sluggish updates, poor adaptation.
-
----
-
-### 🧩 Case 5: **β → 1.0**
-
-- Velocity barely decays — keeps almost all past information.
-- If gradients change direction, updates may **overshoot or oscillate** badly.
-- The optimizer may not converge.
-
-👉 **In short:** too much momentum = instability.
-
----
-
-## 📊 Summary Table
-
-| β Value | Effect | Behavior |
-| --- | --- | --- |
-| 0 | No momentum | Plain SGD, slow & noisy |
-| 0.5 | Weak momentum | Mild smoothing |
-| 0.9 | Strong, balanced | Fast & stable (common) |
-| 0.99 | Very strong | Slow to adapt |
-| →1.0 | Too high | Overshoot / divergence |
-
----
-
-## 🧠 Mental Picture
-
-- **Small β** → like a ball with *high friction* → stops quickly when slope changes.
-- **Large β** → like a ball with *low friction* → keeps rolling even after slope changes.
-
----
-
-✅ **In short:**
-
-- Increasing β → smoother but slower reactions.
-- Decreasing β → faster reactions but more noise.
-- Practical range: **0.8 – 0.95**
-
----
-
-Would you like me to make this into a **RemNote-style flashcard set** so you can memorize how β affects convergence speed and stability?
-
-# **Batch Gradient Descent (BGD)**
+# 🔵 Batch Gradient Descent (BGD)
 
 **Batch Gradient Descent uses the entire dataset to compute gradients at each iteration.** This provides the most accurate gradient estimate but is computationally expensive for large datasets.
 
 ### **Algorithm**
 
-Initialize: w, b randomly
-For each epoch:
-    1. Compute predictions for ALL samples: $ŷ = w·X + b$
-    2. Compute loss:
+## Batch Gradient Descent for Linear Regression
 
- $L = \frac{1}{n}\sum{(y - ŷ)²}$
+**Initialize:** \(w\) and \(b\) randomly.
 
-$dw = \frac{2}{n}\sum{(ŷ - y)}·X$
-    3. Compute gradients using ALL samples:
-       $dw = (2/n)Σ(ŷ - y)·X$
-       $db=(2/n)Σ(ŷ - y)$
-    4. Update parameters:
-       $w = w - η·dw$
-       $b = b - η·db$
+**For each epoch:**
+
+- **Compute predictions for all samples:**
+
+   $$
+   \hat{y}_i = wx_i + b
+   $$
+
+- **Compute the Mean Squared Error (MSE) loss:**
+
+   $$ L = \frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2 $$
+
+- **Compute gradients using all samples:**
+
+   $$  dw = \frac{2}{n}\sum_{i=1}^{n}(\hat{y}_i-y_i)x_i $$
+
+   $$ db = \frac{2}{n}\sum_{i=1}^{n}(\hat{y}_i-y_i) $$
+
+- **Update the parameters:**
+
+   $$ w \leftarrow w - \eta\,dw $$
+
+   $$ b \leftarrow b - \eta\,db $$
+
+
+
 
 ### **3.2.2 Characteristics**
 
@@ -359,7 +125,7 @@ $dw = \frac{2}{n}\sum{(ŷ - y)}·X$
 | **Memory** | Requires loading entire dataset |
 | **Updates per Epoch** | 1 update per complete pass through data |
 
-# **Stochastic Gradient Descent (SGD)**
+# 🔵 Stochastic Gradient Descent (SGD)
 
 **Stochastic Gradient Descent uses a single randomly selected sample to compute gradients at each iteration.** This provides fast updates with noisy gradients, enabling online learning and escape from poor local minima.
 
@@ -389,25 +155,38 @@ For each epoch:
 | **Updates per Epoch** | n updates (one per sample) |
 | **Special Properties** | Can escape shallow local minima, enables online learning |
 
-# **Mini-Batch Gradient Descent (MBGD)**
+# 🔵 Mini-Batch Gradient Descent (MBGD)
 
 **Mini-Batch Gradient Descent uses small batches of samples to compute gradients.** This balances the accuracy of BGD with the speed of SGD, and is the most commonly used variant in modern deep learning.
 
 ### **Algorithm**
 
-Initialize: w, b randomly
+
+```text
+Initialize w, b randomly
+
 For each epoch:
-    Shuffle dataset
-    Divide dataset into batches of size b
+    Shuffle the dataset
+    Divide the dataset into batches of size b
+
     For each batch B:
-        1. Compute predictions for batch: ŷ = w·X_batch + b
-        2. Compute loss for batch: L = (1/b)Σ(y_batch - ŷ)²
-        3. Compute gradients using batch:
-           dw = (2/b)Σ(ŷ - y_batch)·X_batch
-           db = (2/b)Σ(ŷ - y_batch)
+        1. Compute predictions:
+           ŷ = w · X_batch + b
+
+        2. Compute batch loss:
+           L = (1/b) Σ (y_batch - ŷ)²
+
+        3. Compute gradients:
+           dw = (2/b) Σ (ŷ - y_batch) · X_batch
+           db = (2/b) Σ (ŷ - y_batch)
+
         4. Update parameters:
-           w = w - η·dw
-           b = b - η·db
+           w = w - η · dw
+           b = b - η · db
+```
+
+
+
 
 ### **Characteristics**
 
@@ -427,7 +206,511 @@ Common batch sizes: 32, 64, 128, 256
 - **Small batches** (16-32): More noise, better generalization, memory efficient
 - **Large batches** (256-512): Smoother convergence, faster computation, more memory
 
-# **Nesterov Accelerated Gradient (NAG)**
+
+
+
+
+
+---
+!!! info "Next Topic"
+
+
+# 🔵 Momentum-based Gradient Descent
+
+## 💡 Intuitive Idea
+
+Imagine rolling a **ball down a hill** (the loss surface).
+
+- **Plain Gradient Descent**: The ball moves slowly and zigzags if the hill is steep and curved.
+- **Momentum Gradient Descent**: The ball builds **speed** in the downhill direction — it gains *momentum* and moves smoother and faster toward the bottom.
+
+---
+
+---
+
+## ⚙️ With Momentum
+
+We add a **velocity term** ($v_t$) to keep track of *past gradients*:
+
+
+$$\begin{aligned}
+\theta_{t+1} &= \theta_t - \eta u_t \\ 
+u_t &= \beta u_{t-1} + (1 - \beta)\nabla_\theta L(\theta_t)
+\end{aligned}$$
+
+Where:
+
+- $(u_t)$ → running average of past gradients (velocity)
+- $(\beta)$ → momentum coefficient (usually between 0.8 and 0.99), (controls how much past velocity we keep)
+- $(\eta)$ → learning rate
+
+---
+
+### 🧠 Intuition Behind Each Term
+
+| Symbol | Meaning | Intuition |
+| --- | --- | --- |
+| $(u_t)$ | Velocity | Like the speed and direction of the ball |
+| $(\beta u_{t-1})$ | Momentum from the past | Keeps moving in same direction if gradients point the same way |
+| $((1-\beta)\nabla L)$ | Current gradient | Corrects direction if the slope changes |
+| $(\eta u_t)$ | Step size | How far to move in the parameter space |
+
+---
+
+### 🔍 Why It Helps
+
+1. **Smooths updates**
+    - Without momentum, gradients fluctuate — the path zigzags.
+    - With momentum, updates are averaged, so it moves smoothly.
+2. **Speeds up convergence**
+    - When gradients point in the same direction, momentum amplifies the movement.
+    - The ball accelerates down consistent slopes.
+3. **Reduces oscillation**
+    - Especially helpful when loss surface is steep in one dimension and flat in another.
+
+---
+
+### 🧭 Visual Analogy
+
+Imagine pushing a heavy ball down a bumpy hill:
+
+- If you push gently (small learning rate), it’s slow.
+- If you push too hard (high learning rate), it overshoots.
+- But if the ball has **momentum**, it rolls smoothly and naturally across small bumps.
+
+---
+
+### 🔢 Typical Values
+
+- Momentum ($\beta$): **0.9** (most common)
+- Learning rate ($\eta$): tuned per problem, e.g., 0.01 or 0.001
+
+---
+
+
+
+---
+
+**Physical Analogy:**
+Imagine a ball rolling down a hill. Momentum helps the ball:
+
+1. **Accelerate** in directions of consistent downward slope
+2. **Dampen oscillations** in directions with conflicting gradients
+3. **Escape shallow local minima** by maintaining velocity
+
+**Key Advantages:**
+
+- Faster convergence in relevant directions
+- Reduced oscillations in high-curvature regions
+- Better navigation through plateaus and ravines
+- Helps escape saddle points
+
+**Typical Hyperparameter Settings:**
+
+- $\beta$ = 0.9 (standard)
+- $\beta$ = 0.99 (for very large models or smooth optimization landscapes)
+
+## 🔍 What β Controls - Summary Table
+
+
+
+| **β Value** | **Memory of Past Gradients** | **Update Behavior** | **Advantages** | **Drawbacks** | **Typical Use** |
+|:-----------:|------------------------------|---------------------|----------------|---------------|-----------------|
+| **0** | No memory | Plain Gradient Descent (\(v_t=\nabla L(\theta_t)\)); updates depend only on the current gradient; slow and zig-zag | Simple and predictable | No momentum, noisy updates, slow convergence | Simple or convex optimization problems |
+| **0.5** | Moderate memory (keeps ~50% of previous velocity) | Moderately smooth updates; adapts fairly quickly to changing gradients | Faster than plain SGD while remaining responsive | Less acceleration than higher momentum | Loss surfaces where gradient direction changes frequently |
+| **0.9** *(default in PyTorch SGD)* | High memory (keeps ~90% of previous velocity) | Smooth updates; accelerates along consistent directions; good balance of speed and stability | Fast convergence with reduced oscillations | May be slightly less responsive to sudden changes | Default choice for most deep learning models (CNNs, RNNs, Transformers) |
+| **0.99** | Very high memory | Extremely smooth updates; reacts slowly to new gradient directions | Excellent smoothing on stable loss surfaces | Sluggish adaptation; may overshoot or take longer to converge when gradients change | Very smooth optimization landscapes |
+| **→ 1.0** | Almost complete memory | Velocity hardly decays; optimizer keeps nearly all past information | Strong acceleration in one direction | Overshooting, oscillations, possible failure to converge | Generally **not recommended** |
+
+
+
+---
+
+
+## 🧠 Mental Picture
+
+- **Small β** → like a ball with *high friction* → stops quickly when slope changes.
+- **Large β** → like a ball with *low friction* → keeps rolling even after slope changes.
+
+---
+
+✅ **In short:**
+
+- Increasing β → smoother but slower reactions.
+- Decreasing β → faster reactions but more noise.
+- Practical range: **0.8 – 0.95**
+
+---
+
+
+
+# 🔵 Momentum-based Gradient Descent
+
+- **Momentum-based Gradient Descent**  
+  Uses past gradient information to smooth and accelerate learning.
+
+### Update Rule
+
+The momentum term is updated as:
+
+$$
+u_t = \beta u_{t-1} + \nabla L(w_t)
+$$
+
+with
+
+$$
+u_{-1} = 0,
+\qquad
+w_0 = \operatorname{rand}(),
+\qquad
+0 \leq \beta < 1
+$$
+
+The parameter is then updated as:
+
+$$
+w_{t+1} = w_t - \eta u_t
+$$
+
+where:
+
+- \(u_t\) → momentum / velocity
+- \(\beta\) → momentum coefficient
+- \(\eta\) → learning rate
+- \(\nabla L(w_t)\) → gradient of the loss at iteration \(t\)
+
+---
+
+### Velocity Update
+
+An alternative, normalized formulation is:
+
+$$
+v_t
+=
+\beta v_{t-1}
++
+(1-\beta)\nabla L(\theta_t)
+$$
+
+### Parameter Update
+
+$$
+\theta_{t+1}
+=
+\theta_t-\eta v_t
+$$
+
+---
+
+### Why is Momentum an Exponentially Weighted Average of Past Gradients?
+
+Consider the velocity update:
+
+$$
+v_t
+=
+\beta v_{t-1}
++
+(1-\beta)\nabla L(\theta_t)
+$$
+
+Starting with
+
+$$
+v_{-1}=0
+$$
+
+we get:
+
+**At \(t=0\):**
+
+$$
+v_0
+=
+(1-\beta)\nabla L(\theta_0)
+$$
+
+**At \(t=1\):**
+
+$$
+\begin{aligned}
+v_1
+&=
+\beta v_0
++
+(1-\beta)\nabla L(\theta_1) \\
+&=
+\beta(1-\beta)\nabla L(\theta_0)
++
+(1-\beta)\nabla L(\theta_1)
+\end{aligned}
+$$
+
+**At \(t=2\):**
+
+$$
+\begin{aligned}
+v_2
+&=
+\beta v_1
++
+(1-\beta)\nabla L(\theta_2) \\
+&=
+\beta^2(1-\beta)\nabla L(\theta_0)
++
+\beta(1-\beta)\nabla L(\theta_1)
++
+(1-\beta)\nabla L(\theta_2)
+\end{aligned}
+$$
+
+Therefore, in general:
+
+$$
+\boxed{
+v_t
+=
+(1-\beta)
+\sum_{\tau=0}^{t}
+\beta^{t-\tau}
+\nabla L(\theta_\tau)
+}
+$$
+
+why momentum based gradient descent is exponentially weighted average of current and all past gradients
+
+$$
+\begin{aligned}
+u_t &= \beta u_{t-1} + \nabla w_t \\[4pt]
+u_0 &= \nabla w_0
+\qquad \because \qquad
+u_{-1}=0 \\[4pt]
+u_1 &= \beta u_0 + \nabla w_1 \\
+    &= \beta(\nabla w_0) + \nabla w_1 \\[4pt]
+u_2 &= \beta u_1 + \nabla w_2 \\
+    &= \beta(\beta\nabla w_0 + \nabla w_1) + \nabla w_2 \\
+    &= \beta^2\nabla w_0 + \beta\nabla w_1 + \nabla w_2 \\[4pt]
+u_t &= \sum_{\tau=0}^{t} \beta^{t-\tau}\nabla w_\tau
+\end{aligned}
+$$
+
+
+
+The coefficient of a gradient from the past is multiplied by an increasing power of \(\beta\).
+
+For example:
+
+$$
+\nabla L(\theta_t)
+\rightarrow (1-\beta)
+$$
+
+$$
+\nabla L(\theta_{t-1})
+\rightarrow (1-\beta)\beta
+$$
+
+$$
+\nabla L(\theta_{t-2})
+\rightarrow (1-\beta)\beta^2
+$$
+
+Thus, **recent gradients receive more weight while older gradients receive exponentially smaller weights**.
+
+This is why momentum behaves like an **exponentially weighted moving average (EWMA)** of past gradients.
+
+---
+
+### Intuition
+
+Think of momentum like **rolling a ball down a hill**.
+
+- The gradient tells the ball which direction the slope is pointing.
+- Momentum gives the ball some memory of its previous direction.
+- If gradients consistently point in the same direction, momentum builds up speed.
+- If gradients repeatedly change direction, the accumulated momentum smooths out the changes.
+
+Therefore, momentum:
+
+- Accelerates movement in consistent directions.
+- Reduces oscillations.
+- Helps the optimizer move through shallow regions faster.
+
+---
+
+### Effect of \(\beta\)
+
+The parameter \(\beta\) controls **how much memory of previous gradients is retained**.
+
+#### \(\beta = 0\)
+
+The velocity update becomes:
+
+$$
+v_t
+=
+\nabla L(\theta_t)
+$$
+
+Therefore:
+
+$$
+\theta_{t+1}
+=
+\theta_t
+-
+\eta\nabla L(\theta_t)
+$$
+
+This is simply **ordinary gradient descent**.
+
+There is no momentum.
+
+**Behavior:**
+
+- No memory of previous gradients.
+- Updates can be noisy.
+- Can exhibit zig-zag motion.
+
+---
+
+#### \(\beta = 0.5\)
+
+$$
+v_t
+=
+0.5v_{t-1}
++
+0.5\nabla L(\theta_t)
+$$
+
+This provides **moderate smoothing**.
+
+Useful when the gradient direction changes frequently but you still want the optimizer to respond reasonably quickly to new gradients.
+
+---
+
+#### \(\beta = 0.9\)
+
+$$
+v_t
+=
+0.9v_{t-1}
++
+0.1\nabla L(\theta_t)
+$$
+
+This retains substantial information from previous gradients.
+
+It is a common momentum value and provides a good balance between:
+
+- Smoothness
+- Speed
+- Responsiveness
+
+---
+
+#### \(\beta = 0.99\)
+
+$$
+v_t
+=
+0.99v_{t-1}
++
+0.01\nabla L(\theta_t)
+$$
+
+This gives **very strong momentum**.
+
+The optimizer heavily relies on historical gradients and reacts slowly to changes in the current gradient.
+
+**Advantages:**
+
+- Very smooth updates.
+- Useful when the loss landscape changes gradually.
+
+**Risks:**
+
+- Slow adaptation to new directions.
+- Can overshoot.
+- May become sluggish.
+
+---
+
+#### \(\beta = 1\)
+
+If
+
+$$
+\beta = 1
+$$
+
+then
+
+$$
+v_t
+=
+v_{t-1}
++
+\nabla L(\theta_t)
+$$
+
+The old velocity never decays.
+
+Therefore, gradients from the distant past continue accumulating indefinitely.
+
+This can cause:
+
+- Excessive momentum.
+- Overshooting.
+- Instability.
+- Difficulty adapting when the gradient direction changes.
+
+Hence, in standard momentum methods:
+
+$$
+\boxed{0 \leq \beta < 1}
+$$
+
+---
+
+### Summary
+
+| \(\beta\) | Memory | Behavior |
+|---:|---|---|
+| \(0\) | None | Plain gradient descent |
+| \(0.5\) | Moderate | Some smoothing |
+| \(0.9\) | High | Good balance of speed and stability |
+| \(0.99\) | Very high | Very smooth but slow to adapt |
+| \(1\) | Infinite | Can become unstable |
+
+> **Key idea:** \(\beta\) controls how much the optimizer remembers its past direction. A larger \(\beta\) means more memory and smoother updates, while a smaller \(\beta\) makes the optimizer respond more strongly to the current gradient.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 🔵 Nesterov Accelerated Gradient (NAG)
+
+
+
 
 ### **Mathematical Foundation**
 
@@ -436,9 +719,14 @@ Common batch sizes: 32, 64, 128, 256
 **Update Rules:**
 
 $$
-v_t = \beta v_{t-1} + \nabla_\theta L(\theta_t - \alpha \beta v_{t-1})\\
-\theta_{t+1} = \theta_t - \alpha v_t
+\begin{aligned}
+u_t &= \beta u_{t-1} + \eta \nabla L(w_t - \beta u_{t-1}) \\
+w_{t+1} &= w_t - u_t \\[1ex]
+&\text{with } u_{-1} = 0 \text{ and } 0 \le \beta < 1
+\end{aligned}
 $$
+
+
 
 **Key Innovation - The "Look-Ahead":**
 
@@ -463,7 +751,7 @@ Instead of computing the gradient at the current position $\theta_t$, Nesterov m
 - Benefits are most pronounced in convex optimization
 - For non-convex deep learning, benefits over classical momentum are often marginal
 
-# **Adagrad (Adaptive Gradient Algorithm)**
+# 🔵 Adagrad (Adaptive Gradient Algorithm)
 
 ### **Mathematical Foundation**
 
@@ -472,8 +760,10 @@ Instead of computing the gradient at the current position $\theta_t$, Nesterov m
 **Update Rules:**
 
 $$
-G_t = G_{t-1} + (\nabla_\theta L(\theta_t))^2\\
-\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{G_t + \epsilon}} \odot \nabla_\theta L(\theta_t)
+\begin{aligned}
+v_t &= v_{t-1} + (\nabla_\theta L(\theta_t))^2\\
+\theta_{t+1} &= \theta_t - \frac{\eta}{\sqrt{v_t + \epsilon}} \odot \nabla_\theta L(\theta_t)
+\end{aligned}
 $$
 
 Where:
@@ -510,7 +800,7 @@ This can cause premature convergence where learning essentially stops before rea
 - Recommender systems (sparse user-item interactions)
 - Problems with highly varying feature frequencies
 
-# **RMSProp (Root Mean Square Propagation)**
+# 🔵 RMSProp (Root Mean Square Propagation)
 
 ### **Mathematical Foundation**
 
@@ -519,16 +809,33 @@ This can cause premature convergence where learning essentially stops before rea
 **Update Rules:**
 
 $$
-E[g^2]t = \beta E[g^2]{t-1} + (1-\beta)(\nabla_\theta L(\theta_t))^2 \\
-\theta_{t+1} = \theta_t - \frac{\alpha}{\sqrt{E[g^2]t + \epsilon}} \odot \nabla\theta L(\theta_t)
+\begin{aligned}
+v_t &= \beta v_{t-1} + (1-\beta)(\nabla L(w_t))^2 \\
+\\
+w_{t+1} &= w_t -  \frac{\eta}{\sqrt{v_t}+\epsilon} \nabla L(w_t)
+\end{aligned}
+$$
+
+
+**bias-corrected RMSProp**
+
+$$
+\begin{aligned}
+v_t &= \beta v_{t-1} + (1-\beta)(\nabla L(w_t))^2 \\
+\hat{v}_t &= \frac{v_t}{1-\beta^t} \\
+w_{t+1} &= w_t -  \frac{\eta}{\sqrt{v_t}+\epsilon} \nabla L(w_t)
+\end{aligned}
 $$
 
 Where:
 
-- $E[g^2]_t$ : Exponential moving average of squared gradients
-- $\beta$ : Decay rate (typically 0.9 or 0.99)
-- $\alpha$ : Learning rate
-- $\epsilon$ : Small constant for numerical stability
+- $\nabla L(w_t)$ : Gradient of the loss with respect to the parameters at iteration $t$
+- $v_t$ : Exponentially weighted moving average of the squared gradients
+- $\beta$ : Decay rate (typically $0.9$ or $0.99$)
+- $\eta$ : Learning rate
+- $\epsilon$ : Small positive constant (typically $10^{-8}$) added to prevent division by zero and improve numerical stability
+
+
 
 **Key Innovation - Exponential Moving Average:**
 
@@ -560,7 +867,7 @@ With $\beta = 0.9$, approximately the last 10 gradient updates significantly inf
 - Still requires manual learning rate tuning
 - Typical hyperparameters: $\alpha = 0.001$, $\beta = 0.9$
 
-# **AdaDelta**
+# 🔵 AdaDelta 
 
 ### **Mathematical Foundation**
 
@@ -568,19 +875,42 @@ With $\beta = 0.9$, approximately the last 10 gradient updates significantly inf
 
 **Update Rules:**
 
+
 $$
-E[g^2]t = \rho E[g^2]{t-1} + (1-\rho)g_t^2 \\ \\ 
-\Delta\theta_t = -\frac{\sqrt{E[\Delta\theta^2]_{t-1} + \epsilon}}{\sqrt{E[g^2]_t + \epsilon}} g_t \\ \\ 
-E[\Delta\theta^2]t = \rho E[\Delta\theta^2]{t-1} + (1-\rho)\Delta\theta_t^2 \\ \\
-\theta_{t+1} = \theta_t + \Delta\theta_t
+\begin{aligned}
+E[g^2]_t &= \rho E[g^2]_{t-1} + (1-\rho)g_t^2 \\[8pt]
+\Delta\theta_t &= -\frac{\sqrt{E[\Delta\theta^2]_{t-1}+\epsilon}}
+{\sqrt{E[g^2]_t+\epsilon}}\,g_t \\[8pt]
+E[\Delta\theta^2]_t &= \rho E[\Delta\theta^2]_{t-1}
++ (1-\rho)(\Delta\theta_t)^2 \\[8pt]
+\theta_{t+1} &= \theta_t + \Delta\theta_t
+\end{aligned}
 $$
 
 Where:
 
-- $E[g^2]_t$ : Exponential moving average of squared gradients
-- $E[\Delta\theta^2]_t$ : Exponential moving average of squared parameter updates
-- $\rho$ : Decay rate (typically 0.9 or 0.95)
-- $\epsilon$ : Small constant for numerical stability
+- $g_t = \nabla L(\theta_t)$ : Gradient of the loss with respect to the parameters at iteration $t$
+- $E[g^2]_t$ : Exponentially weighted moving average of the squared gradients
+- $E[\Delta\theta^2]_t$ : Exponentially weighted moving average of the squared parameter updates
+- $\rho$ : Decay rate (typically $0.9$ or $0.95$)
+- $\epsilon$ : Small positive constant (typically $10^{-6}$ or $10^{-8}$) added to improve numerical stability and prevent division by zero
+- $\Delta\theta_t$ : Parameter update at iteration $t$
+- $\theta_t$ : Model parameters at iteration $t$
+
+
+$$
+\text{for } t \text{ in } \text{range}(1, N): \\
+\begin{aligned}
+1. \rightarrow &\ \nabla w_t \\
+2. \rightarrow &\ v_t = \beta v_{t-1} + (1 - \beta)(\nabla w_t)^2 \\
+3. \rightarrow &\ \boxed{ \Delta w_t = -\frac{\sqrt{u_{t-1} + \epsilon}}{\sqrt{v_t + \epsilon}} \nabla w_t } \\
+4. \rightarrow &\ w_{t+1} = w_t + \Delta w_t \\
+5. \rightarrow &\ u_t = \beta u_{t-1} + (1 - \beta)(\Delta w_t)^2
+\end{aligned}
+$$
+
+
+
 
 **Key Innovation - No Learning Rate:**
 
@@ -614,9 +944,12 @@ This provides:
 - Typical hyperparameter: $\rho = 0.95$
 - First iteration uses a small default step size (since no previous updates exist)
 
-# **The Adam Family of Optimizers**
+# The Adam Family of Optimizers
 
-# **Adam (Adaptive Moment Estimation)**
+# 🔵 Adam (Adaptive Moment Estimation)
+
+## Intuition
+Do everything that RMSProp and AdaDelta does to solve the decay problem of Adagrad Plus use a cumulative history of the gradients
 
 ### **Mathematical Foundation**
 
@@ -641,6 +974,17 @@ Where:
 - $\beta_2$ : Decay rate for second moment (typically 0.999)
 - $\alpha$ : Learning rate (typically 0.001)
 - $\epsilon$ : Small constant (typically 10^{-8})
+
+$$
+\begin{aligned}
+m_t &= \beta_1 m_{t-1} + (1 - \beta_1)\nabla w  && \longleftarrow \text{ Incorporating classical momentum} \\
+\hat{m}_t &= \frac{m_t}{1 - \beta_1^t} \\
+v_t &= \beta_2 v_{t-1} + (1 - \beta_2)(\nabla w_t)^2 \\
+\hat{v}_t &= \frac{v_t}{1 - \beta_2^t} && \text{Typically, } \beta_1 = 0.9, \beta_2 = 0.999 \\
+w_{t+1} &= w_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon}\hat{m}_t
+\end{aligned}
+$$
+
 
 **Key Innovation - Bias Correction:**
 
@@ -685,7 +1029,7 @@ Adam initializes moment estimates at zero, which causes bias toward zero in earl
 
 **Visualizing the loss curves reveals the distinct convergence patterns of each gradient descent variant.**
 
-# **AdamW (Adam with Decoupled Weight Decay)**
+# 🔵 AdamW (Adam with Decoupled Weight Decay)
 
 ### **Mathematical Foundation**
 
@@ -1177,3 +1521,144 @@ Would you like me to **continue the flashcard series for `torch.nn.functional`**
 (the stateless functional API that pairs with `torch.nn` for activations, loss functions, etc.)?
 
 It’s one of the most important next steps after mastering `torch.optim`.
+
+
+
+
+
+---
+## 📘 Choosing an Optimization Algorithm in Deep Learning
+
+An **optimization algorithm** (or **optimizer**) decides **how your model’s weights are updated** after each training step.
+
+Different optimizers handle learning in **different ways** — some are fast, some are stable, and some are better for large datasets.
+
+---
+
+### 🔹 Step 1: Understand What You’re Optimizing
+
+All optimizers try to **minimize a loss function** (for example, classification error or MSE).
+
+They change the weights ( W ) in the opposite direction of the gradient:
+
+$$W_{\text{new}} = W_{\text{old}} - \text{learning rate} \times \text{gradient}$$
+
+The **difference** is in how they use the gradient.
+
+---
+
+### 🔹 Step 2: Know the Main Optimizers and When to Use Them
+
+| Optimizer | How It Works | When to Use | Notes |
+| --- | --- | --- | --- |
+| **SGD (Stochastic Gradient Descent)** | Uses raw gradients directly | Small datasets, simple models | Good baseline; needs careful learning rate tuning |
+| **SGD + Momentum** | Adds memory of past gradients for smoother updates | Deep networks, image tasks | Faster convergence, reduces oscillation |
+| **RMSprop** | Adapts learning rate for each parameter | Recurrent Neural Networks (RNNs), noisy gradients | Handles non-stationary data well |
+| **Adam** | Combines Momentum + RMSprop | Most general tasks (CNNs, Transformers) | Default optimizer for many deep learning problems |
+| **AdamW** | Adam with correct weight decay | Large models (Transformers, BERT, GPT) | Handles regularization better |
+| **Adagrad** | Adapts learning rate to each parameter | Sparse data (like NLP word embeddings) | May slow down training over time |
+| **Adadelta** | Improvement over Adagrad | When learning rate is hard to choose | Less sensitive to initial learning rate |
+| **LBFGS** | Second-order approximation (uses curvature) | Small datasets, classical ML-like problems | High memory cost, not for large neural nets |
+
+---
+
+### 🔹 Step 3: Consider These Factors Before Choosing
+
+1. **Dataset Size**
+    - Small datasets → SGD or Adam both work.
+    - Large datasets → Adam or AdamW is more stable.
+2. **Model Type**
+    - CNNs → Adam or SGD with momentum.
+    - RNNs → RMSprop or Adam.
+    - Transformers → AdamW.
+3. **Learning Rate Sensitivity**
+    - If your model is sensitive → Adam (auto adjusts learning rate).
+    - If you want full control → SGD (you tune manually).
+4. **Regularization Need**
+    - For models that overfit easily → use **AdamW** or add **weight decay**.
+5. **Computation Cost**
+    - Adam and RMSprop use more memory.
+    - SGD is cheaper but may converge slowly.
+
+---
+
+### 🔹 Step 4: Common Practice (Rule of Thumb)
+
+| Situation | Recommended Optimizer |
+| --- | --- |
+| General deep learning (default choice) | **Adam** |
+| Large-scale models (Transformers, LLMs) | **AdamW** |
+| Simple image networks (CNNs) | **SGD with Momentum** |
+| RNNs, noisy data | **RMSprop** |
+| Sparse features (like text embeddings) | **Adagrad** |
+
+---
+
+### 🔹 Step 5: Fine-Tuning Tips
+
+- Always **start with Adam** → simple and fast.
+- Once model works, try **SGD + Momentum** for possible better generalization.
+- Use **learning rate scheduling** (e.g., `StepLR`, `ReduceLROnPlateau`) to improve stability.
+- Watch training curves:
+    - **Loss decreases too slowly** → learning rate too small.
+    - **Loss jumps or NaN** → learning rate too high.
+
+---
+
+### ✅ Summary
+
+| Key Idea | Explanation |
+| --- | --- |
+| Optimizers control how weights update | Different strategies for faster and stable convergence |
+| Adam is a strong default | Works for most tasks |
+| SGD with momentum often generalizes better | Common in vision models |
+| AdamW is preferred for large modern architectures | Fixes weight decay issue in Adam |
+| Choice depends on data, model, and training behavior | No one-size-fits-all |
+
+---
+
+
+```mermaid
+flowchart TB
+
+    A["Learning Rate Schemes"]
+
+    A --- B["Based on Epochs"]
+    A --- C["Based on Validation"]
+    A --- D["Based on Gradients"]
+
+    
+    direction TB
+    B1["1. Step Decay
+        2. Exponential Decay
+        3. Cyclical
+        4. Cosine Annealing
+        5. Warm Restart"]
+
+
+
+    direction TB
+    C1["1. Line Search
+        2. Log Search"]
+
+
+
+    direction TB
+    D1["1. AdaGrad
+        2. RMSProp
+        3. AdaDelta
+        4. Adam
+        5. AdaMax
+        6. NAdam
+        7. AMSGrad
+        8. AdamW"]
+    
+
+    B --> B1
+    C --> C1
+    D --> D1
+
+    style A fill:#ffffff,stroke:#333,stroke-width:2px
+
+```
+

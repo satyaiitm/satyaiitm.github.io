@@ -2,6 +2,7 @@ Below are the main loss functions typically used in deep learning, with formula,
 
 ---
 
+# Mean Squared Error (MSE)
 ## 1. Mean Squared Error (MSE)
 
 **Formula (single sample)**

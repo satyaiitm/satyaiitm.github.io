@@ -31,11 +31,11 @@ theme:
 
 nav:
   - Home: index.md
-  - Notes: notes.md
-  - Deep Learning:
-      - Overview: deep-learning/index.md
-  - Math:
-      - Overview: math/index.md
+  # - Notes: notes.md
+  # - Deep Learning:
+  #     - Overview: deep-learning/index.md
+  # - Math:
+  #     - Overview: math/index.md
 
 
 

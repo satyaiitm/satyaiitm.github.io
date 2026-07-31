@@ -1,23 +1,23 @@
 # MLF formula
 
-## **Regression :**
+## Regression 
 
 - $f(x) = W^Tx+b = \sum_{i=1}^d w_ix_i+b$
 - Loss =    $\frac{1}{n} \sum_{i=1} ^ n (f(x_i)-y_i)$
 
-## Classification :
+## Classification 
 
 - $f(x) = \sin(W^Tx+b)$
 - $loss = \frac{1}{n} \sum_{i=1}^n 1(f(x_i) \ne y_i)$
 
-## Dimensionality reduction :
+## Dimensionality reduction 
 
 - $Encoder \qquad f: \mathbb R^d \to \mathbb R^{d'}$
 - $Decoding \qquad f:\mathbb R^{d'} \to \mathbb R^d$
 - $Goal \qquad g(f(x_i)) \approx x_i$
 - $loss \qquad \frac{1}{n} \sum _{i=1}^n || g(f(x_i)) - x_i||^2$
 
-## Density Estimations :
+## Density Estimations 
 
 - Probability mapping $P : \mathbb R^d \to \mathbb R_+$ (sum of all $\mathbb R_+$ is 1)
 - Goal : $P(x)$ is large if $x\in Data$ and low otherwise
@@ -25,25 +25,26 @@
 - $f$ is better if $\boxed{Loss[f] \lt Loss[g]}$
 
 
+---
 
 # Calculous
 
-### Continuity :
+## Continuity 
 
-$\lim_{x \to a^-}f(x) = f(a) =  \lim_{x \to a^+}f(x)$
+- $\lim_{x \to a^-}f(x) = f(a) =  \lim_{x \to a^+}f(x)$
 
-### Differentiability:
+## Differentiability:
 
-$\lim_{x \to a^-}\frac{f(x)-f(a))}{x-a} = f'(a) =  \lim_{x \to a^+}\frac{f(x)-f(a))}{x-a}$
+- $\lim_{x \to a^-}\frac{f(x)-f(a))}{x-a} = f'(a) =  \lim_{x \to a^+}\frac{f(x)-f(a))}{x-a}$
 
 ## Linear approximation:
 
-$*\boxed{f(x)≈f(a)+f'(a)(x-a)}*$
+- $\boxed{f(x)≈f(a)+f'(a)(x-a)}$
 
-Here:
-$*f(a)*$ is the function value at $*a*$,
-$*f'(a)*$ is the derivative of $*f*$ at $*a*$, representing the slope of the tangent line,
-$*(x-a)*$ is the difference between the point $x$ where we want to approximate $f$and the point $a$ where we know $f$.
+
+    - $f(a)$ is the function value at $a$,
+    - $f'(a)$ is the derivative of $f$ at $a$, representing the slope of the tangent line,
+    - $(x-a)$ is the difference between the point $x$ where we want to approximate $f$and the point $a$ where we know $f$.
 
 ### $n^{th}$ order approximation:
 
@@ -156,7 +157,25 @@ Orthogonally Diagonalizable matrices:
 ## Complex matrix:
 
 
-![Complex matrix](../images/Complex_matrix.png)
+### Real versus Complex
+
+| $\mathbf{R}^n$ ($n$ real components) | $\leftrightarrow$ | $\mathbf{C}^n$ ($n$ complex components) |
+| :--- | :---: | :--- |
+| length: $\|x\|^2 = x_1^2 + \cdots + x_n^2$ | $\leftrightarrow$ | length: $\|x\|^2 = |x_1|^2 + \cdots + |x_n|^2$ |
+| transpose: $A_{ij}^{\text{T}} = A_{ji}$ | $\leftrightarrow$ | Hermitian transpose: $A_{ij}^{\text{H}} = \overline{A_{ji}}$ |
+| $(AB)^{\text{T}} = B^{\text{T}}A^{\text{T}}$ | $\leftrightarrow$ | $(AB)^{\text{H}} = B^{\text{H}}A^{\text{H}}$ |
+| inner product: $x^{\text{T}}y = x_1 y_1 + \cdots + x_n y_n$ | $\leftrightarrow$ | inner product: $x^{\text{H}}y = \bar{x}_1 y_1 + \cdots + \bar{x}_n y_n$ |
+| $(Ax)^{\text{T}}y = x^{\text{T}}(A^{\text{T}}y)$ | $\leftrightarrow$ | $(Ax)^{\text{H}}y = x^{\text{H}}(A^{\text{H}}y)$ |
+| orthogonality: $x^{\text{T}}y = 0$ | $\leftrightarrow$ | orthogonality: $x^{\text{H}}y = 0$ |
+| symmetric matrices: $A^{\text{T}} = A$ | $\leftrightarrow$ | Hermitian matrices: $A^{\text{H}} = A$ |
+| $A = Q\Lambda Q^{-1} = Q\Lambda Q^{\text{T}}$ (real $\Lambda$) | $\leftrightarrow$ | $A = U\Lambda U^{-1} = U\Lambda U^{\text{H}}$ (real $\Lambda$) |
+| skew-symmetric $K^{\text{T}} = -K$ | $\leftrightarrow$ | skew-Hermitian $K^{\text{H}} = -K$ |
+| orthogonal $Q^{\text{T}}Q = I$ or $Q^{\text{T}} = Q^{-1}$ | $\leftrightarrow$ | unitary $U^{\text{H}}U = I$ or $U^{\text{H}} = U^{-1}$ |
+| $(Qx)^{\text{T}}(Qy) = x^{\text{T}}y$ and $\|Qx\| = \|x\|$ | $\leftrightarrow$ | $(Ux)^{\text{H}}(Uy) = x^{\text{H}}y$ and $\|Ux\| = \|x\|$ |
+
+> **Note:** The columns, rows, and eigenvectors of $Q$ and $U$ are orthonormal, and every $|\lambda| = 1$
+
+
 
 - Conjugate:      $\overline{(a+ib)} = (a-ib)$
 - Inner product:       $\overline{x}^T.y$
